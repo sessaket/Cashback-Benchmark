@@ -1,0 +1,1800 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cashback Benchmark</title>
+  <style>
+    :root {
+      --bg: #f4f6f9;
+      --card: #ffffff;
+      --text: #1b2430;
+      --muted: #5c6b7a;
+      --accent: #3b6ea8;
+      --border: #e3e7ef;
+      --shadow: 0 14px 30px rgba(20, 32, 56, 0.08);
+      --shadow-soft: 0 8px 18px rgba(20, 32, 56, 0.06);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      color: var(--text);
+      background: var(--bg);
+      font-family: "Calibri", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 250px;
+      background: #ffffff;
+      border-right: 1px solid var(--border);
+      padding: 24px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .brand .logo {
+      width: 140px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .brand h1 {
+      font-size: 16px;
+      margin: 0;
+      letter-spacing: 0.3px;
+      color: var(--text);
+    }
+
+    .brand p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .nav-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+
+    .nav-list a {
+      display: block;
+      padding: 8px 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--muted);
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      font-size: 13px;
+    }
+
+    .nav-list a:hover {
+      color: var(--text);
+      border-color: var(--border);
+      background: #f7f9fc;
+    }
+
+    .nav-list a.active {
+      color: var(--text);
+      background: #eef3fb;
+      border-color: #cdd8ea;
+    }
+
+    .sidebar .meta {
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .deck {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      min-width: 0;
+    }
+
+    .topbar {
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .topbar .title {
+      font-size: 12px;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .lang-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 2px 6px;
+      font-size: 12px;
+    }
+
+    .lang-btn.active {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .lang-sep {
+      color: #cdd8ea;
+    }
+
+    .btn {
+      background: #ffffff;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: transform 0.2s ease, border 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      background: #f3f6fb;
+      border-color: #cdd8ea;
+      transform: translateY(-1px);
+    }
+
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .deck-main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 32px 56px;
+    }
+
+    .stage {
+      position: relative;
+      width: min(1280px, 100%);
+      aspect-ratio: 16 / 9;
+      max-height: 100%;
+    }
+
+    .slides {
+      position: absolute;
+      inset: 0;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+      padding: 56px 64px;
+      border-radius: 18px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .watermark {
+      position: absolute;
+      left: 24px;
+      bottom: 20px;
+      width: 88px;
+      height: auto;
+      opacity: 0.65;
+      pointer-events: none;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    .slide h2 {
+      margin: 0;
+      font-size: 34px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .slide p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .cover {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 18px;
+    }
+
+    .cover .cover-logo {
+      width: 280px;
+      max-width: 60%;
+      height: auto;
+    }
+
+    .cover .cover-title {
+      font-size: 44px;
+      font-weight: 700;
+      margin: 0;
+      color: var(--text);
+    }
+
+    .agenda-list {
+      margin: 0;
+      padding-left: 22px;
+      font-size: 18px;
+      line-height: 1.5;
+      color: var(--text);
+      columns: 2;
+      column-gap: 36px;
+    }
+
+    .agenda-list li {
+      break-inside: avoid;
+      margin: 6px 0;
+    }
+
+    .definition-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .cashback-diagram {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      flex: 1;
+      width: 100%;
+      align-items: stretch;
+    }
+
+    .diagram-panel {
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 26px;
+      background: #ffffff;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      text-align: center;
+    }
+
+    .diagram-icon {
+      width: 132px;
+      height: 132px;
+      border-radius: 28px;
+      background: #eef4fb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+    }
+
+    .diagram-panel.promo .diagram-icon {
+      background: #fff4e6;
+      color: #d08a2d;
+    }
+
+    .diagram-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .diagram-keywords {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .diagram-keywords span {
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      color: var(--text);
+    }
+
+    .diagram-bullets {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 14px;
+      line-height: 1.45;
+      color: var(--text);
+      text-align: left;
+    }
+
+    .diagram-bullets li {
+      margin: 4px 0;
+    }
+
+    .key-rule {
+      margin-top: 8px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px dashed #c9d6e6;
+      background: #f8fafc;
+      font-size: 14px;
+      color: var(--text);
+      width: 100%;
+      text-align: center;
+    }
+
+    .definition-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 22px;
+      background: #ffffff;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .definition-card h3 {
+      margin: 0;
+      font-size: 20px;
+      color: var(--text);
+    }
+
+    .definition-card ul {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .app-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .app-title {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .app-region {
+      font-size: 12px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .app-header-logo {
+      width: 120px;
+      height: 54px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 8px 10px;
+      background: #ffffff;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .app-header-logo img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .app-body {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 28px;
+      flex: 1;
+      width: 100%;
+    }
+
+    .app-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .app-logo-card {
+      flex: 1;
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      background: #ffffff;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .app-logo-card img {
+      max-width: 70%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .app-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .app-link {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: 13px;
+      text-decoration: none;
+      color: var(--text);
+      background: #ffffff;
+      transition: all 0.2s ease;
+    }
+
+    .app-link.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+
+    .app-link:hover {
+      border-color: #c7d5ea;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .app-study {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px 24px;
+      background: #ffffff;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .study-section {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .study-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .study-line {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    .study-list {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    .study-list li {
+      margin: 4px 0;
+    }
+
+    .takeaways-list {
+      margin: 0;
+      padding-left: 22px;
+      font-size: 18px;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .overview-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .overview-wrap {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px 18px;
+      width: 100%;
+      align-content: start;
+    }
+
+    .overview-heading {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      width: 100%;
+    }
+
+    .overview-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 8px;
+      background: #ffffff;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text);
+      transition: transform 0.2s ease, border 0.2s ease;
+    }
+
+    .overview-card:hover {
+      transform: translateY(-2px);
+      border-color: #c7d5ea;
+    }
+
+    .overview-logo {
+      width: 66px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .overview-logo img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .overview-name {
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .overview-badge {
+      font-size: 9px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      color: var(--text);
+    }
+
+    .overview-badge.real {
+      border-color: #b8d1f0;
+      color: #2d5b90;
+      background: #eef4fb;
+    }
+
+    .overview-badge.promo {
+      border-color: #f1d6b6;
+      color: #a0671d;
+      background: #fff4e6;
+    }
+
+    .overview-note {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      width: 100%;
+    }
+
+    .overview-slide {
+      gap: 14px;
+    }
+
+    .overview-slide .overview-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .dots {
+      position: absolute;
+      bottom: -34px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #d4dbe7;
+      border: 1px solid #c7cfdd;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .dot.active {
+      background: var(--accent);
+      transform: scale(1.15);
+      border-color: var(--accent);
+    }
+
+    .progress {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 1100px) {
+      .slide { padding: 44px 48px; }
+      .slide h2 { font-size: 28px; }
+      .app-body { grid-template-columns: 1fr; }
+      .app-logo-card { min-height: 240px; }
+      .app-study { padding: 18px; }
+      .overview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 900px) {
+      body { flex-direction: column; }
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        overflow-x: auto;
+        padding: 12px 16px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+      .brand { min-width: 180px; }
+      .nav-list {
+        flex-direction: row;
+        gap: 6px;
+        flex: 1;
+      }
+      .nav-list a {
+        white-space: nowrap;
+        font-size: 12px;
+      }
+      .sidebar .meta { display: none; }
+      .deck { height: auto; }
+      .deck-main { padding: 18px; }
+      .stage { width: 100%; }
+      .dots { position: static; transform: none; margin-top: 12px; }
+    }
+
+    @media print {
+      body {
+        background: white;
+        color: black;
+        overflow: visible;
+        display: block;
+      }
+      .sidebar, .topbar, .dots { display: none !important; }
+      .deck { display: block; height: auto; }
+      .deck-main { padding: 0; }
+      .stage { width: 100%; aspect-ratio: auto; }
+      .slides { position: static; }
+      .slide {
+        position: relative;
+        display: block !important;
+        width: 100%;
+        height: auto;
+        page-break-after: always;
+        border: 1px solid #d0d0d0;
+        border-radius: 0;
+        box-shadow: none;
+        background: white;
+        padding: 48px 56px;
+      }
+    }
+
+    :fullscreen body,
+    :-webkit-full-screen body {
+      background: #ffffff;
+    }
+
+    :fullscreen .sidebar,
+    :-webkit-full-screen .sidebar {
+      display: none !important;
+    }
+
+    :fullscreen .deck,
+    :-webkit-full-screen .deck {
+      height: 100vh;
+    }
+
+    :fullscreen .deck-main,
+    :-webkit-full-screen .deck-main {
+      padding: 12px;
+    }
+
+    :fullscreen .stage,
+    :-webkit-full-screen .stage {
+      width: min(1600px, 100%);
+      max-height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <img class="logo" src="assets/Tomorrow_Systems_Logo.webp" alt="Tomorrow Systems logo" />
+      <h1 id="deckTitle">Cashback Benchmark</h1>
+      <p id="deckSubtitle">App-based market scan</p>
+    </div>
+    <ul class="nav-list" id="slideNav"></ul>
+   
+  </aside>
+
+  <div class="deck">
+    <div class="topbar">
+      <div class="title" id="slideTitle">Slide 1</div>
+      <div class="controls">
+        <span class="progress" id="progress">1 / 1</span>
+        <button class="btn" id="prevBtn">Prev</button>
+        <button class="btn" id="nextBtn">Next</button>
+        <button class="btn" id="fsBtn">Fullscreen</button>
+        <div class="lang-toggle" id="langToggle" aria-label="Language">
+          <button class="lang-btn" type="button" data-lang="en">EN</button>
+          <span class="lang-sep">|</span>
+          <button class="lang-btn" type="button" data-lang="fr">FR</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="deck-main">
+      <div class="stage">
+        <div class="slides" id="slidesRoot"></div>
+        <div class="dots" id="dots"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const slidesRoot = document.getElementById('slidesRoot');
+    const navList = document.getElementById('slideNav');
+    const dots = document.getElementById('dots');
+    const title = document.getElementById('slideTitle');
+    const progress = document.getElementById('progress');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const fsBtn = document.getElementById('fsBtn');
+    const langToggle = document.getElementById('langToggle');
+    const deckTitle = document.getElementById('deckTitle');
+    const deckSubtitle = document.getElementById('deckSubtitle');
+
+    const i18n = {
+      en: {
+        labels: {
+          positioning: 'Positioning',
+          mechanics: 'Mechanics',
+          business: 'Business Model',
+          wins: 'Why it wins',
+          risks: 'Risks',
+          website: 'Website',
+          getApp: 'Get the App'
+        },
+        ui: {
+          deckTitle: 'Cashback Benchmark',
+          deckSubtitle: 'App-based market scan',
+          prev: 'Prev',
+          next: 'Next',
+          fullscreen: 'Fullscreen'
+        },
+        definition: {
+          title: 'What we mean by Cashback',
+          leftTitle: 'Real Cashback',
+          leftKeywords: ['Money back', 'Withdrawable'],
+          leftBullets: [
+            'Definition: user earns real money (redeemable balance).',
+            'Source: usually merchant-funded (affiliate/partner payout).',
+            'Tracking: validated purchase (affiliate link / partner confirmation / card-linked).',
+            'Redemption: cash-out / wallet / bank transfer.'
+          ],
+          rightTitle: 'Promo Rewards',
+          rightKeywords: ['Bonus', 'Campaign-based'],
+          rightBullets: [
+            'Definition: campaign incentives (bonus, points, vouchers).',
+            'Source: issuer/telco/brand promo budgets.',
+            'Tracking: often instant inside app (rules).',
+            'Redemption: points/vouchers/discounts; may expire; not always withdrawable.'
+          ],
+          keyRule: ' withdrawable money balance = Real Cashback. Time-limited points/vouchers = Promo Rewards.'
+        },
+        overview: {
+          title: 'Apps Overview & Navigation',
+          note: '',
+          badges: { real: 'Real Cashback', promo: 'Promo Rewards' }
+        },
+        regions: {
+          morocco: 'Morocco',
+          arab: 'Arab Region',
+          africa: 'Africa',
+          europe: 'Europe'
+        }
+      },
+      fr: {
+        labels: {
+          positioning: 'Positionnement',
+          mechanics: 'Mécanismes',
+          business: 'Modèle économique',
+          wins: 'Pourquoi ça marche',
+          risks: 'Risques',
+          website: 'Site web',
+          getApp: 'Télécharger l’app'
+        },
+        ui: {
+          deckTitle: 'Benchmark Cashback',
+          deckSubtitle: 'Scan de marché par app',
+          prev: 'Précédent',
+          next: 'Suivant',
+          fullscreen: 'Plein écran'
+        },
+        definition: {
+          title: 'Ce que nous entendons par Cashback',
+          leftTitle: 'Cashback réel',
+          leftKeywords: ['Remboursement', 'Retirable'],
+          leftBullets: [
+            'Définition : l’utilisateur gagne de l’argent réel (solde récupérable).',
+            'Source : généralement financé par les marchands (affiliation/partenaires).',
+            'Suivi : achat validé (lien affilié / confirmation partenaire / carte liée).',
+            'Rachat : retrait / portefeuille / virement bancaire.'
+          ],
+          rightTitle: 'Récompenses promo',
+          rightKeywords: ['Bonus', 'Campagnes'],
+          rightBullets: [
+            'Définition : incitations de campagne (bonus, points, bons).',
+            'Source : budgets promo émetteur/telco/marque.',
+            'Suivi : souvent instantané dans l’app (règles).',
+            'Rachat : points/bons/remises ; peut expirer ; pas toujours retirable.'
+          ],
+          keyRule: 'solde d’argent retirable = Cashback réel. Points/bons à durée limitée = Récompenses promo.'
+        },
+        overview: {
+          title: 'Aperçu des applications & navigation',
+          note: 'Cliquez sur une application pour accéder à sa fiche d’analyse.',
+          badges: { real: 'Cashback réel', promo: 'Récompenses promo' }
+        },
+        regions: {
+          morocco: 'Maroc',
+          arab: 'Région arabe',
+          africa: 'Afrique',
+          europe: 'Europe'
+        }
+      }
+    };
+
+    let currentLang = localStorage.getItem('deckLang') || 'en';
+    if (!i18n[currentLang]) currentLang = 'en';
+
+    const t = (value) => {
+      if (value && typeof value === 'object') {
+        return value[currentLang] || value.en || '';
+      }
+      return value || '';
+    };
+
+    const slideData = [
+      {
+        type: 'cover',
+        title: { en: 'Cover', fr: 'Couverture' },
+        coverTitle: 'Tomorrow Systems'
+      },
+      {
+        type: 'definition',
+        title: { en: 'What we mean by Cashback', fr: 'Ce que nous entendons par Cashback' }
+      },
+      {
+        type: 'app',
+        name: 'Kenzup',
+        region: 'morocco',
+        cashbackType: 'real',
+        logo: 'assets/apps/kenzup.svg',
+        website: 'https://www.kenzup.com/',
+        store: 'https://play.google.com/store/apps/details?id=com.kenzup.app.prod',
+        positioning: {
+          en: 'What it is: Cashback wallet (real cashback)',
+          fr: 'Ce que c’est : portefeuille cashback (cashback réel)'
+        },
+        mechanics: [
+          { en: 'Earn: merchant-funded cashback at partner merchants', fr: 'Gain : cashback financé par les marchands chez partenaires' },
+          { en: 'Tracking: in-app partner validation, confirmed after purchase', fr: 'Suivi : validation partenaire dans l’app, confirmé après achat' },
+          { en: 'Redemption: withdrawable balance, delayed', fr: 'Rachat : solde retirable, différé' }
+        ],
+        business: [
+          { en: 'Funding: merchant-funded', fr: 'Financement : marchands' },
+          { en: 'Revenue: partner fees and merchant commissions', fr: 'Revenus : frais partenaires et commissions marchands' },
+          { en: 'Constraints: partner density and payout cost', fr: 'Contraintes : densité partenaires et coût des paiements' }
+        ],
+        wins: [
+          { en: 'Distribution: local merchant network', fr: 'Distribution : réseau de marchands locaux' },
+          { en: 'UX: visible balance and cash-out', fr: 'UX : solde visible et retrait' }
+        ],
+        risks: [
+          { en: 'Scale depends on partner coverage', fr: 'Échelle dépend de la couverture partenaires' },
+          { en: 'Tracking disputes with merchants', fr: 'Litiges de suivi avec les marchands' }
+        ]
+      },
+      {
+        type: 'app',
+        name: 'inwi money',
+        region: 'morocco',
+        cashbackType: 'promo',
+        logo: 'assets/apps/inwi-money.png',
+        website: 'https://inwimoney.ma/fr/application-mobile',
+        store: 'https://play.google.com/store/apps/details?id=ma.inwi.money',
+        positioning: {
+          en: 'What it is: Wallet (promo rewards)',
+          fr: 'Ce que c’est : portefeuille (récompenses promo)'
+        },
+        mechanics: [
+          { en: 'Earn: bill-pay promos and partner offers', fr: 'Gain : promos sur factures et offres partenaires' },
+          { en: 'Tracking: wallet ledger, confirmed instantly', fr: 'Suivi : ledger portefeuille, confirmé instantanément' },
+          { en: 'Redemption: wallet credits, instant', fr: 'Rachat : crédits portefeuille, instantané' }
+        ],
+        business: [
+          { en: 'Funding: issuer-funded promos', fr: 'Financement : promos financées par l’émetteur' },
+          { en: 'Revenue: interchange and partner fees', fr: 'Revenus : interchange et frais partenaires' },
+          { en: 'Constraints: promo budget sustainability', fr: 'Contraintes : soutenabilité du budget promo' }
+        ],
+        wins: [
+          { en: 'Distribution: telco base', fr: 'Distribution : base télécom' },
+          { en: 'UX: low-friction bill pay', fr: 'UX : paiement de factures fluide' }
+        ],
+        risks: [
+          { en: 'Campaign dependency', fr: 'Dépendance aux campagnes' },
+          { en: 'Incentive regulation limits', fr: 'Limites réglementaires sur les incitations' }
+        ]
+      },
+      {
+        type: 'app',
+        name: 'Orange Money Maroc',
+        region: 'morocco',
+        cashbackType: 'promo',
+        logo: 'assets/apps/orange-money.png',
+        website: 'https://www.orange.ma/orangemoney',
+        store: 'https://play.google.com/store/apps/details?id=com.orange.orangemoney',
+        positioning: {
+          en: 'What it is: Wallet (promo rewards)',
+          fr: 'Ce que c’est : portefeuille (récompenses promo)'
+        },
+        mechanics: [
+          { en: 'Earn: promos on bill pay and merchant spend', fr: 'Gain : promos sur factures et achats marchands' },
+          { en: 'Tracking: wallet ledger, near-instant', fr: 'Suivi : ledger portefeuille, quasi instantané' },
+          { en: 'Redemption: wallet credits, instant', fr: 'Rachat : crédits portefeuille, instantané' }
+        ],
+        business: [
+          { en: 'Funding: issuer-funded promos', fr: 'Financement : promos financées par l’émetteur' },
+          { en: 'Revenue: interchange and partner fees', fr: 'Revenus : interchange et frais partenaires' },
+          { en: 'Constraints: promo budget and offer depth', fr: 'Contraintes : budget promo et profondeur d’offre' }
+        ],
+        wins: [
+          { en: 'Distribution: telco reach', fr: 'Distribution : portée télécom' },
+          { en: 'UX: everyday payment utility', fr: 'UX : utilité pour paiements quotidiens' }
+        ],
+        risks: [
+          { en: 'Offer fatigue over time', fr: 'Usure des offres avec le temps' },
+          { en: 'Campaign dependency', fr: 'Dépendance aux campagnes' }
+        ]
+      },
+      {
+        type: 'app',
+        name: 'MT Cash',
+        region: 'morocco',
+        cashbackType: 'promo',
+        logo: 'assets/apps/mt-cash.png',
+        website: 'https://www.mtcash.ma/',
+        store: 'https://play.google.com/store/apps/details?id=ma.iam.mtcash',
+        positioning: {
+          en: 'What it is: Wallet (promo rewards)',
+          fr: 'Ce que c’est : portefeuille (récompenses promo)'
+        },
+        mechanics: [
+          { en: 'Earn: telco promos on transfers and merchants', fr: 'Gain : promos télécom sur transferts et marchands' },
+          { en: 'Tracking: wallet ledger, instant', fr: 'Suivi : ledger portefeuille, instantané' },
+          { en: 'Redemption: wallet credits, instant', fr: 'Rachat : crédits portefeuille, instantané' }
+        ],
+        business: [
+          { en: 'Funding: issuer-funded promos', fr: 'Financement : promos émetteur' },
+          { en: 'Revenue: interchange and transaction fees', fr: 'Revenus : interchange et frais de transaction' },
+          { en: 'Constraints: promo budget and seasonality', fr: 'Contraintes : budget promo et saisonnalité' }
+        ],
+        wins: [
+          { en: 'Distribution: telco retail footprint', fr: 'Distribution : réseau retail télécom' },
+          { en: 'UX: simple wallet flow', fr: 'UX : parcours wallet simple' }
+        ],
+        risks: [
+          { en: 'Seasonal promo cycles', fr: 'Cycles promo saisonniers' },
+          { en: 'Price-sensitive users', fr: 'Utilisateurs sensibles au prix' }
+        ]
+      },
+      {
+        type: 'app',
+        name: 'stc pay',
+        region: 'arab',
+        cashbackType: 'promo',
+        logo: 'assets/apps/stc-pay.png',
+        website: 'https://stcbank.com.sa/',
+        store: 'https://play.google.com/store/apps/details?id=sa.com.stcpay',
+        positioning: {
+          en: 'What it is: Wallet (promo rewards)',
+          fr: 'Ce que c’est : portefeuille (récompenses promo)'
+        },
+        mechanics: [
+          { en: 'Earn: bill-pay promos and merchant offers', fr: 'Gain : promos sur factures et offres marchands' },
+          { en: 'Tracking: wallet ledger, instant', fr: 'Suivi : ledger portefeuille, instantané' },
+          { en: 'Redemption: wallet credits, instant', fr: 'Rachat : crédits portefeuille, instantané' }
+        ],
+        business: [
+          { en: 'Funding: issuer-funded promos', fr: 'Financement : promos émetteur' },
+          { en: 'Revenue: interchange and partner fees', fr: 'Revenus : interchange et frais partenaires' },
+          { en: 'Constraints: promo budget discipline', fr: 'Contraintes : discipline budgétaire promo' }
+        ],
+        wins: [
+          { en: 'Distribution: telco + bank base', fr: 'Distribution : base télécom + banque' },
+          { en: 'UX: utility payments in one app', fr: 'UX : paiements utiles dans une seule app' }
+        ],
+        risks: [
+          { en: 'Campaign dependency', fr: 'Dépendance aux campagnes' },
+          { en: 'Regulatory constraints on incentives', fr: 'Contraintes réglementaires sur les incitations' }
+        ]
+      },
+      {
+        type: 'app',
+        name: 'Careem Pay',
+        region: 'arab',
+        cashbackType: 'promo',
+        logo: 'assets/apps/careem.png',
+        website: 'https://www.careem.com/en-AE/pay/',
+        store: 'https://play.google.com/store/search?q=Careem&c=apps',
+        positioning: {
+          en: 'What it is: Super-app wallet (promo rewards)',
+          fr: 'Ce que c’est : super-app wallet (récompenses promo)'
+        },
+        mechanics: [
+          { en: 'Earn: rewards on rides, food, partners', fr: 'Gain : récompenses sur rides, food, partenaires' },
+          { en: 'Tracking: in-app transactions, instant', fr: 'Suivi : transactions in-app, instantané' },
+          { en: 'Redemption: wallet credits, instant', fr: 'Rachat : crédits wallet, instantané' }
+        ],
+        business: [
+          { en: 'Funding: hybrid (partner + platform)', fr: 'Financement : hybride (partenaires + plateforme)' },
+          { en: 'Revenue: commissions, interchange, partner fees', fr: 'Revenus : commissions, interchange, frais partenaires' },
+          { en: 'Constraints: subsidy cost at scale', fr: 'Contraintes : coût des subventions ? l’échelle' }
+        ],
+        wins: [
+          { en: 'Distribution: super-app frequency', fr: 'Distribution : fréquence super-app' },
+          { en: 'UX: rewards embedded in daily use', fr: 'UX : récompenses intégrées au quotidien' }
+        ],
+        risks: [
+          { en: 'Promo cost pressure', fr: 'Pression sur les coûts promo' },
+          { en: 'Margin sensitivity', fr: 'Sensibilité des marges' }
+        ]
+      },
+      {
+        type: 'app',
+        name: 'Smiles',
+        region: 'arab',
+        cashbackType: 'promo',
+        logo: 'assets/apps/smiles.png',
+        website: 'https://smiles.ae/en/index.html',
+        store: 'https://play.google.com/store/apps/details?id=ae.etisalat.smiles',
+        positioning: {
+          en: 'What it is: Rewards super-app (promo rewards)',
+          fr: 'Ce que c’est : super-app de récompenses (promo)'
+        },
+        mechanics: [
+          { en: 'Earn: points or cashback at partner merchants', fr: 'Gain : points ou cashback chez partenaires' },
+          { en: 'Tracking: partner integrations, often delayed', fr: 'Suivi : intégrations partenaires, souvent différé' },
+          { en: 'Redemption: points or vouchers, delayed', fr: 'Rachat : points ou bons, différé' }
+        ],
+        business: [
+          { en: 'Funding: partner-funded rewards', fr: 'Financement : récompenses financées par partenaires' },
+          { en: 'Revenue: partner fees and merchant promos', fr: 'Revenus : frais partenaires et promos marchands' },
+          { en: 'Constraints: reward liability management', fr: 'Contraintes : gestion du passif de points' }
+        ],
+        wins: [
+          { en: 'Distribution: large partner network', fr: 'Distribution : large réseau partenaires' },
+          { en: 'UX: multi-category rewards hub', fr: 'UX : hub récompenses multi-catégories' }
+        ],
+        risks: [
+          { en: 'Points are not cash', fr: 'Points ? cash' },
+          { en: 'Redemption complexity', fr: 'Complexité de la rédemption' }
+        ]
+      },
+      {
+        type: 'app',
+        name: 'Vodafone Cash',
+        region: 'arab',
+        cashbackType: 'promo',
+        logo: 'assets/apps/vodafone-cash.png',
+        website: 'https://web.vodafone.com.eg/en/vodafone-cash',
+        store: 'https://play.google.com/store/search?q=Vodafone%20Cash&c=apps',
+        positioning: {
+          en: 'What it is: Wallet (promo rewards)',
+          fr: 'Ce que c’est : portefeuille (récompenses promo)'
+        },
+        mechanics: [
+          { en: 'Earn: bill-pay promos and merchant offers', fr: 'Gain : promos factures et offres marchands' },
+          { en: 'Tracking: wallet ledger, instant', fr: 'Suivi : ledger portefeuille, instantané' },
+          { en: 'Redemption: wallet credits, instant', fr: 'Rachat : crédits portefeuille, instantané' }
+        ],
+        business: [
+          { en: 'Funding: issuer-funded promos', fr: 'Financement : promos émetteur' },
+          { en: 'Revenue: interchange and transaction fees', fr: 'Revenus : interchange et frais de transaction' },
+          { en: 'Constraints: promo budget and fraud risk', fr: 'Contraintes : budget promo et risque fraude' }
+        ],
+        wins: [
+          { en: 'Distribution: telco user base', fr: 'Distribution : base clients télécom' },
+          { en: 'UX: simple wallet redemption', fr: 'UX : rédemption wallet simple' }
+        ],
+        risks: [
+          { en: 'Campaign dependency', fr: 'Dépendance aux campagnes' },
+          { en: 'Fraud and chargeback risk', fr: 'Risque fraude et rétrofacturation' }
+        ]
+      },
+      {
+        type: 'app',
+        name: 'M-Pesa',
+        region: 'africa',
+        cashbackType: 'promo',
+        logo: 'assets/apps/mpesa.png',
+        website: 'https://www.safaricom.co.ke/',
+        store: 'https://play.google.com/store/apps/details?id=com.safaricom.mpesa.lifestyle',
+        positioning: {
+          en: 'What it is: Wallet ecosystem (promo rewards)',
+          fr: 'Ce que c’est : écosystème wallet (récompenses promo)'
+        },
+        mechanics: [
+          { en: 'Earn: promos on bill pay and merchant pay', fr: 'Gain : promos sur factures et paiements marchands' },
+          { en: 'Tracking: wallet ledger, instant', fr: 'Suivi : ledger wallet, instantané' },
+          { en: 'Redemption: wallet credits, instant', fr: 'Rachat : crédits wallet, instantané' }
+        ],
+        business: [
+          { en: 'Funding: issuer-funded promos', fr: 'Financement : promos émetteur' },
+          { en: 'Revenue: transaction fees and interchange', fr: 'Revenus : frais de transaction et interchange' },
+          { en: 'Constraints: regulatory limits and promo cost', fr: 'Contraintes : limites réglementaires et coût promo' }
+        ],
+        wins: [
+          { en: 'Distribution: ubiquitous agent network', fr: 'Distribution : réseau d’agents ubiquitaire' },
+          { en: 'UX: everyday payment habit', fr: 'UX : habitudes de paiement quotidiennes' }
+        ],
+        risks: [
+          { en: 'Regulatory changes', fr: 'Changements réglementaires' },
+          { en: 'Campaign dependency', fr: 'Dépendance aux campagnes' }
+        ]
+      },
+      {
+        type: 'app',
+        name: 'OPay',
+        region: 'africa',
+        cashbackType: 'promo',
+        logo: 'assets/apps/opay.png',
+        website: 'https://www.opay.ng/',
+        store: 'https://play.google.com/store/apps/details?id=team.opay.pay',
+        positioning: {
+          en: 'What it is: Wallet (promo rewards)',
+          fr: 'Ce que c’est : portefeuille (récompenses promo)'
+        },
+        mechanics: [
+          { en: 'Earn: promos on bills, transfers, merchants', fr: 'Gain : promos sur factures, transferts, marchands' },
+          { en: 'Tracking: in-app ledger, instant', fr: 'Suivi : ledger in-app, instantané' },
+          { en: 'Redemption: wallet credits, instant', fr: 'Rachat : crédits wallet, instantané' }
+        ],
+        business: [
+          { en: 'Funding: issuer-funded promos', fr: 'Financement : promos émetteur' },
+          { en: 'Revenue: interchange and service fees', fr: 'Revenus : interchange et frais de service' },
+          { en: 'Constraints: promo cost pressure', fr: 'Contraintes : pression sur coûts promo' }
+        ],
+        wins: [
+          { en: 'Distribution: aggressive user acquisition', fr: 'Distribution : acquisition utilisateurs agressive' },
+          { en: 'UX: fast, mobile-first payments', fr: 'UX : paiements rapides mobile-first' }
+        ],
+        risks: [
+          { en: 'Campaign dependency', fr: 'Dépendance aux campagnes' },
+          { en: 'Fraud and abuse', fr: 'Fraude et abus' }
+        ]
+      },
+      {
+        type: 'app',
+        name: 'PalmPay',
+        region: 'africa',
+        cashbackType: 'promo',
+        logo: 'assets/apps/palmpay.png',
+        website: 'https://www.palmpay.com/',
+        store: 'https://play.google.com/store/apps/details?id=com.transsnet.palmpay',
+        positioning: {
+          en: 'What it is: Wallet (promo rewards)',
+          fr: 'Ce que c’est : portefeuille (récompenses promo)'
+        },
+        mechanics: [
+          { en: 'Earn: promos on bills and in-app pay', fr: 'Gain : promos sur factures et paiements in-app' },
+          { en: 'Tracking: wallet ledger, instant', fr: 'Suivi : ledger wallet, instantané' },
+          { en: 'Redemption: wallet credits, instant', fr: 'Rachat : crédits wallet, instantané' }
+        ],
+        business: [
+          { en: 'Funding: issuer-funded promos', fr: 'Financement : promos émetteur' },
+          { en: 'Revenue: interchange and partner fees', fr: 'Revenus : interchange et frais partenaires' },
+          { en: 'Constraints: offer funding variability', fr: 'Contraintes : variabilité du financement des offres' }
+        ],
+        wins: [
+          { en: 'Distribution: strong retail agent presence', fr: 'Distribution : forte présence d’agents retail' },
+          { en: 'UX: simple daily payment flow', fr: 'UX : parcours de paiement quotidien simple' }
+        ],
+        risks: [
+          { en: 'Campaign dependency', fr: 'Dépendance aux campagnes' },
+          { en: 'Payout cost volatility', fr: 'Volatilité du coût des paiements' }
+        ]
+      },
+      {
+        type: 'app',
+        name: 'Airtel Money',
+        region: 'africa',
+        cashbackType: 'promo',
+        logo: 'assets/apps/airtel-money.svg',
+        website: 'https://www.airtel.africa/',
+        store: 'https://play.google.com/store/search?q=Airtel%20Money&c=apps',
+        positioning: {
+          en: 'What it is: Telco wallet (promo rewards)',
+          fr: 'Ce que c’est : wallet télécom (récompenses promo)'
+        },
+        mechanics: [
+          { en: 'Earn: promos on airtime and bills', fr: 'Gain : promos sur airtime et factures' },
+          { en: 'Tracking: wallet ledger, instant', fr: 'Suivi : ledger wallet, instantané' },
+          { en: 'Redemption: wallet credits, instant', fr: 'Rachat : crédits wallet, instantané' }
+        ],
+        business: [
+          { en: 'Funding: issuer-funded promos', fr: 'Financement : promos émetteur' },
+          { en: 'Revenue: transaction fees and interchange', fr: 'Revenus : frais de transaction et interchange' },
+          { en: 'Constraints: promo budget and seasonality', fr: 'Contraintes : budget promo et saisonnalité' }
+        ],
+        wins: [
+          { en: 'Distribution: telco reach across markets', fr: 'Distribution : portée télécom multi-pays' },
+          { en: 'UX: familiar telco wallet', fr: 'UX : wallet télécom familier' }
+        ],
+        risks: [
+          { en: 'Seasonal promo cycles', fr: 'Cycles promo saisonniers' },
+          { en: 'Regulatory variation by market', fr: 'Variations réglementaires selon pays' }
+        ]
+      },
+      {
+        type: 'app',
+        name: 'TopCashback',
+        region: 'europe',
+        cashbackType: 'real',
+        logo: 'assets/apps/topcashback.png',
+        website: 'https://www.topcashback.co.uk/',
+        store: 'https://play.google.com/store/apps/details?id=com.topcashback.topcashback',
+        positioning: {
+          en: 'What it is: Cashback portal (real cashback)',
+          fr: 'Ce que c’est : portail cashback (cashback réel)'
+        },
+        mechanics: [
+          { en: 'Earn: affiliate link cashback from retailers', fr: 'Gain : cashback via liens affiliés des marchands' },
+          { en: 'Tracking: cookie/affiliate tracking, delayed confirmation', fr: 'Suivi : cookies/affiliation, confirmation différée' },
+          { en: 'Redemption: cash-out, delayed', fr: 'Rachat : retrait, différé' }
+        ],
+        business: [
+          { en: 'Funding: merchant-funded', fr: 'Financement : marchands' },
+          { en: 'Revenue: affiliate commissions', fr: 'Revenus : commissions d’affiliation' },
+          { en: 'Constraints: tracking disputes and payout delays', fr: 'Contraintes : litiges de suivi et délais de paiement' }
+        ],
+        wins: [
+          { en: 'Distribution: broad retailer coverage', fr: 'Distribution : large couverture marchands' },
+          { en: 'UX: clear cash-out structure', fr: 'UX : structure de retrait claire' }
+        ],
+        risks: [
+          { en: 'Tracking accuracy risk', fr: 'Risque d’exactitude du tracking' },
+          { en: 'Delayed confirmations', fr: 'Confirmations différées' }
+        ]
+      },
+      {
+        type: 'app',
+        name: 'iGraal',
+        region: 'europe',
+        cashbackType: 'real',
+        logo: 'assets/apps/igraal.png',
+        website: 'https://www.igraal.com/',
+        store: 'https://play.google.com/store/apps/details?id=fr.snapp.igraal',
+        positioning: {
+          en: 'What it is: Cashback portal (real cashback)',
+          fr: 'Ce que c’est : portail cashback (cashback réel)'
+        },
+        mechanics: [
+          { en: 'Earn: affiliate link cashback via app/extension', fr: 'Gain : cashback via liens affiliés app/extension' },
+          { en: 'Tracking: cookie/affiliate tracking, delayed confirmation', fr: 'Suivi : cookies/affiliation, confirmation différée' },
+          { en: 'Redemption: cash-out, delayed', fr: 'Rachat : retrait, différé' }
+        ],
+        business: [
+          { en: 'Funding: merchant-funded', fr: 'Financement : marchands' },
+          { en: 'Revenue: affiliate commissions', fr: 'Revenus : commissions d’affiliation' },
+          { en: 'Constraints: payout delays and disputes', fr: 'Contraintes : délais de paiement et litiges' }
+        ],
+        wins: [
+          { en: 'Distribution: retailer density in EU', fr: 'Distribution : densité marchands en UE' },
+          { en: 'UX: simple activation flow', fr: 'UX : activation simple' }
+        ],
+        risks: [
+          { en: 'Tracking disputes', fr: 'Litiges de suivi' },
+          { en: 'Delayed payouts', fr: 'Paiements différés' }
+        ]
+      },
+      {
+        type: 'app',
+        name: 'PAYBACK',
+        region: 'europe',
+        cashbackType: 'promo',
+        logo: 'assets/apps/payback.png',
+        website: 'https://www.payback.de/',
+        store: 'https://play.google.com/store/apps/details?id=at.payback.client.android',
+        positioning: {
+          en: 'What it is: Coalition loyalty (promo rewards)',
+          fr: 'Ce que c’est : coalition de fidélité (récompenses promo)'
+        },
+        mechanics: [
+          { en: 'Earn: points at partner merchants', fr: 'Gain : points chez partenaires' },
+          { en: 'Tracking: card or ID at POS, delayed', fr: 'Suivi : carte ou ID en caisse, différé' },
+          { en: 'Redemption: points or vouchers, delayed', fr: 'Rachat : points ou bons, différé' }
+        ],
+        business: [
+          { en: 'Funding: merchant-funded points', fr: 'Financement : points financés par marchands' },
+          { en: 'Revenue: partner fees and data services', fr: 'Revenus : frais partenaires et services data' },
+          { en: 'Constraints: reward liability and breakage', fr: 'Contraintes : passif de points et breakage' }
+        ],
+        wins: [
+          { en: 'Distribution: large coalition network', fr: 'Distribution : large réseau de coalition' },
+          { en: 'UX: multi-merchant earn', fr: 'UX : gains multi-marchands' }
+        ],
+        risks: [
+          { en: 'Points are not cash', fr: 'Points ? cash' },
+          { en: 'Complex partner rules', fr: 'Règles partenaires complexes' }
+        ]
+      },
+      {
+        type: 'app',
+        name: 'myWorld / Cashback World',
+        region: 'europe',
+        cashbackType: 'real',
+        logo: 'assets/apps/cashback-world.png',
+        website: 'https://www.myworld-app.com/',
+        store: 'https://play.google.com/store/search?q=myWorld%20cashback&c=apps',
+        positioning: {
+          en: 'What it is: Cashback network (real cashback)',
+          fr: 'Ce que c’est : réseau cashback (cashback réel)'
+        },
+        mechanics: [
+          { en: 'Earn: cashback at partner merchants online/offline', fr: 'Gain : cashback chez partenaires online/offline' },
+          { en: 'Tracking: app scan or member ID, delayed', fr: 'Suivi : scan app ou ID membre, différé' },
+          { en: 'Redemption: cash-out or vouchers, delayed', fr: 'Rachat : retrait ou bons, différé' }
+        ],
+        business: [
+          { en: 'Funding: merchant-funded', fr: 'Financement : marchands' },
+          { en: 'Revenue: partner fees and network commissions', fr: 'Revenus : frais partenaires et commissions réseau' },
+          { en: 'Constraints: acceptance consistency', fr: 'Contraintes : constance d’acceptation' }
+        ],
+        wins: [
+          { en: 'Distribution: online + offline partners', fr: 'Distribution : partenaires online + offline' },
+          { en: 'UX: clear cashback balance', fr: 'UX : solde cashback clair' }
+        ],
+        risks: [
+          { en: 'Inconsistent merchant acceptance', fr: 'Acceptation marchands inégale' },
+          { en: 'Tracking disputes', fr: 'Litiges de suivi' }
+        ]
+      },
+      {
+        type: 'overview',
+        title: { en: 'Apps Overview & Navigation', fr: 'Aperçu des applications & navigation' }
+      }
+    ];
+
+    const watermark = '<img class="watermark" src="assets/Tomorrow_Systems_Logo.webp" alt="" aria-hidden="true" />';
+
+    const renderCoverSlide = (slide, index, navTitle) => {
+      return `
+        <section class="slide cover" id="slide-${index + 1}" data-title="${navTitle}">
+          <img class="cover-logo" src="assets/Tomorrow_Systems_Logo.webp" alt="Tomorrow Systems logo" />
+          <h1 class="cover-title">${slide.coverTitle}</h1>
+        </section>
+      `;
+    };
+
+    const renderAgendaSlide = (slide, index, navTitle) => {
+      const items = slide.items.map((item) => `<li>${t(item)}</li>`).join('');
+      return `
+        <section class="slide" id="slide-${index + 1}" data-title="${navTitle}">
+          <h2>${t(slide.title)}</h2>
+          <ol class="agenda-list">${items}</ol>
+          ${watermark}
+        </section>
+      `;
+    };
+
+        const renderDefinitionSlide = (slide, index, navTitle) => {
+      const def = i18n[currentLang].definition;
+      const leftKeywords = def.leftKeywords.map((item) => `<span>${item}</span>`).join('');
+      const rightKeywords = def.rightKeywords.map((item) => `<span>${item}</span>`).join('');
+      const leftBullets = def.leftBullets.map((item) => `<li>${item}</li>`).join('');
+      const rightBullets = def.rightBullets.map((item) => `<li>${item}</li>`).join('');
+      return `
+        <section class=\"slide\" id=\"slide-${index + 1}\" data-title=\"${navTitle}\">
+          <h2>${t(slide.title)}</h2>
+          <div class=\"cashback-diagram\">
+            <div class=\"diagram-panel\">
+              <div class=\"diagram-icon\" aria-hidden=\"true\">
+                <svg width=\"72\" height=\"72\" viewBox=\"0 0 72 72\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\">
+                  <rect x=\"10\" y=\"18\" width=\"52\" height=\"36\" rx=\"10\"></rect>
+                  <path d=\"M10 30h52\"></path>
+                  <path d=\"M22 38h12\"></path>
+                  <path d=\"M46 46l8-8\"></path>
+                  <path d=\"M54 38v8h-8\"></path>
+                </svg>
+              </div>
+              <div class=\"diagram-title\">${def.leftTitle}</div>
+              <div class=\"diagram-keywords\">${leftKeywords}</div>
+              <ul class=\"diagram-bullets\">${leftBullets}</ul>
+            </div>
+            <div class=\"diagram-panel promo\">
+              <div class=\"diagram-icon\" aria-hidden=\"true\">
+                <svg width=\"72\" height=\"72\" viewBox=\"0 0 72 72\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\">
+                  <path d=\"M14 26a6 6 0 0 0 0 12v14a6 6 0 0 0 6 6h32a6 6 0 0 0 6-6V38a6 6 0 1 0 0-12\"></path>
+                  <path d=\"M30 26v32\"></path>
+                  <path d=\"M36 20l4 8 9 1-6.5 6 1.5 9-8-4-8 4 1.5-9L23 29l9-1 4-8z\"></path>
+                </svg>
+              </div>
+              <div class=\"diagram-title\">${def.rightTitle}</div>
+              <div class=\"diagram-keywords\">${rightKeywords}</div>
+              <ul class=\"diagram-bullets\">${rightBullets}</ul>
+            </div>
+          </div>
+          <div class=\"key-rule\">${def.keyRule}</div>
+          ${watermark}
+        </section>
+      `;
+    };
+
+        const renderAppSlide = (slide, index, navTitle) => {
+      const storeUrl = slide.store || slide.website;
+      const labels = i18n[currentLang].labels;
+      const regionLabel = i18n[currentLang].regions[slide.region];
+      const mechanics = slide.mechanics.map((item) => `<li>${t(item)}</li>`).join('');
+      const business = slide.business.map((item) => `<li>${t(item)}</li>`).join('');
+      const wins = slide.wins.map((item) => `<li>${t(item)}</li>`).join('');
+      const risks = slide.risks.map((item) => `<li>${t(item)}</li>`).join('');
+      return `
+        <section class=\"slide\" id=\"slide-${index + 1}\" data-title=\"${navTitle}\">
+          <div class=\"app-header\">
+            <div class=\"app-title\">
+              <div class=\"app-region\">${regionLabel}</div>
+              <h2>${slide.name}</h2>
+            </div>
+            <div class=\"app-header-logo\">
+              <img src=\"${slide.logo}\" alt=\"${slide.name} logo\" />
+            </div>
+          </div>
+          <div class=\"app-body\">
+            <div class=\"app-visual\">
+              <div class=\"app-logo-card\">
+                <img src=\"${slide.logo}\" alt=\"${slide.name} logo\" />
+              </div>
+              <div class=\"app-links\">
+                <a class=\"app-link\" href=\"${slide.website}\" target=\"_blank\" rel=\"noreferrer\">${labels.website}</a>
+                <a class=\"app-link primary\" href=\"${storeUrl}\" target=\"_blank\" rel=\"noreferrer\">${labels.getApp}</a>
+              </div>
+            </div>
+            <div class=\"app-study\">
+              <div class=\"study-section\">
+                <div class=\"study-title\">${labels.positioning}</div>
+                <div class=\"study-line\">${t(slide.positioning)}</div>
+              </div>
+              <div class=\"study-section\">
+                <div class=\"study-title\">${labels.mechanics}</div>
+                <ul class=\"study-list\">${mechanics}</ul>
+              </div>
+              <div class=\"study-section\">
+                <div class=\"study-title\">${labels.business}</div>
+                <ul class=\"study-list\">${business}</ul>
+              </div>
+              <div class=\"study-section\">
+                <div class=\"study-title\">${labels.wins}</div>
+                <ul class=\"study-list\">${wins}</ul>
+              </div>
+              <div class=\"study-section\">
+                <div class=\"study-title\">${labels.risks}</div>
+                <ul class=\"study-list\">${risks}</ul>
+              </div>
+            </div>
+          </div>
+          ${watermark}
+        </section>
+      `;
+    };
+
+    const renderTakeawaysSlide = (slide, index, navTitle) => {
+      const items = slide.items.map((item) => `<li>${item}</li>`).join('');
+      return `
+        <section class="slide" id="slide-${index + 1}" data-title="${navTitle}">
+          <h2>${slide.title}</h2>
+          <ul class="takeaways-list">${items}</ul>
+          ${watermark}
+        </section>
+      `;
+    };
+
+        const renderOverviewSlide = (slide, index, navTitle) => {
+      const regionOrder = ['morocco', 'arab', 'africa', 'europe'];
+      const appSlides = slideData
+        .map((item, idx) => ({ ...item, slideIndex: idx + 1 }))
+        .filter((item) => item.type === 'app');
+
+      const groups = regionOrder.map((regionKey) => {
+        const apps = appSlides.filter((item) => item.region === regionKey);
+        if (!apps.length) return '';
+        const cards = apps.map((app) => {
+          const badgeText = i18n[currentLang].overview.badges[app.cashbackType];
+          const badgeClass = app.cashbackType === 'real' ? 'real' : 'promo';
+          return `
+            <a class=\"overview-card\" href=\"#slide-${app.slideIndex}\">
+              <div class=\"overview-logo\">
+                <img src=\"${app.logo}\" alt=\"${app.name} logo\" />
+              </div>
+              <div class=\"overview-name\">${app.name}</div>
+              <div class=\"overview-badge ${badgeClass}\">${badgeText}</div>
+            </a>
+          `;
+        }).join('');
+
+        return `
+          <div class=\"overview-group\">
+            <div class=\"overview-heading\">${i18n[currentLang].regions[regionKey]}</div>
+            <div class=\"overview-grid\">${cards}</div>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <section class=\"slide overview-slide\" id=\"slide-${index + 1}\" data-title=\"${navTitle}\">
+          <h2>${t(slide.title)}</h2>
+          <div class=\"overview-wrap\">${groups}</div>
+          <div class=\"overview-note\">${i18n[currentLang].overview.note}</div>
+          ${watermark}
+        </section>
+      `;
+    };
+
+        const renderSlide = (slide, index) => {
+      const navTitle = slide.navTitle || (slide.type === 'app'
+        ? `${i18n[currentLang].regions[slide.region]} - ${slide.name}`
+        : t(slide.title) || slide.name || `Slide ${index + 1}`);
+      if (slide.type === 'cover') return renderCoverSlide(slide, index, navTitle);
+      if (slide.type === 'agenda') return renderAgendaSlide(slide, index, navTitle);
+      if (slide.type === 'definition') return renderDefinitionSlide(slide, index, navTitle);
+      if (slide.type === 'app') return renderAppSlide(slide, index, navTitle);
+      if (slide.type === 'overview') return renderOverviewSlide(slide, index, navTitle);
+      if (slide.type === 'takeaways') return renderTakeawaysSlide(slide, index, navTitle);
+      return '';
+    };
+
+    const buildSlides = () => {
+      slidesRoot.innerHTML = slideData.map((slide, index) => renderSlide(slide, index)).join('');
+    };
+    let slides = [];
+
+    const buildNavigation = () => {
+      navList.innerHTML = '';
+      dots.innerHTML = '';
+      slides.forEach((slide, index) => {
+        const label = slide.dataset.title || `Slide ${index + 1}`;
+        const li = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = `#slide-${index + 1}`;
+        link.textContent = `${index + 1}. ${label}`;
+        link.addEventListener('click', (event) => {
+          event.preventDefault();
+          showSlide(index, true);
+        });
+        li.appendChild(link);
+        navList.appendChild(li);
+
+        const dot = document.createElement('button');
+        dot.className = 'dot';
+        dot.type = 'button';
+        dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+        dot.addEventListener('click', () => showSlide(index, true));
+        dots.appendChild(dot);
+      });
+    };
+
+    let current = 0;
+
+    const updateLangButtons = () => {
+      const buttons = langToggle.querySelectorAll('.lang-btn');
+      buttons.forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.lang === currentLang);
+      });
+    };
+
+    const renderAll = () => {
+      const ui = i18n[currentLang].ui;
+      buildSlides();
+      slides = Array.from(document.querySelectorAll('.slide'));
+      buildNavigation();
+      if (current >= slides.length) current = slides.length - 1;
+      if (current < 0) current = 0;
+      if (deckTitle) deckTitle.textContent = ui.deckTitle;
+      if (deckSubtitle) deckSubtitle.textContent = ui.deckSubtitle;
+      prevBtn.textContent = ui.prev;
+      nextBtn.textContent = ui.next;
+      fsBtn.textContent = ui.fullscreen;
+      document.title = ui.deckTitle;
+      showSlide(current, false);
+      updateLangButtons();
+    };
+
+    const updateActiveNav = () => {
+      const links = navList.querySelectorAll('a');
+      const dotEls = dots.querySelectorAll('.dot');
+      links.forEach((link, index) => {
+        link.classList.toggle('active', index === current);
+      });
+      dotEls.forEach((dot, index) => {
+        dot.classList.toggle('active', index === current);
+      });
+
+      const label = slides[current].dataset.title || `Slide ${current + 1}`;
+      title.textContent = `${label}`;
+      progress.textContent = `${current + 1} / ${slides.length}`;
+
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === slides.length - 1;
+    };
+
+    const showSlide = (index, updateHash) => {
+      if (index < 0 || index >= slides.length) return;
+      slides[current].classList.remove('active');
+      current = index;
+      slides[current].classList.add('active');
+      updateActiveNav();
+      if (updateHash) {
+        history.replaceState(null, '', `#slide-${current + 1}`);
+      }
+    };
+
+    const parseHash = () => {
+      const match = window.location.hash.match(/slide-(\d+)/);
+      if (match) {
+        const idx = Math.max(1, Math.min(slides.length, parseInt(match[1], 10))) - 1;
+        showSlide(idx, false);
+      }
+    };
+
+    const handleClickNavigation = (event) => {
+      if (event.target.closest('button') || event.target.closest('a')) return;
+      const bounds = slidesRoot.getBoundingClientRect();
+      const midpoint = bounds.left + bounds.width / 2;
+      if (event.clientX < midpoint) {
+        showSlide(current - 1, true);
+      } else {
+        showSlide(current + 1, true);
+      }
+    };
+
+    const handleKey = (event) => {
+      if (event.key === 'ArrowRight') {
+        showSlide(current + 1, true);
+      }
+      if (event.key === 'ArrowLeft') {
+        showSlide(current - 1, true);
+      }
+    };
+
+    const toggleFullscreen = () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    };
+
+    const setLanguage = (lang) => {
+      if (!i18n[lang] || currentLang === lang) return;
+      currentLang = lang;
+      localStorage.setItem('deckLang', lang);
+      renderAll();
+      parseHash();
+      updateActiveNav();
+    };
+
+    prevBtn.addEventListener('click', () => showSlide(current - 1, true));
+    nextBtn.addEventListener('click', () => showSlide(current + 1, true));
+    fsBtn.addEventListener('click', toggleFullscreen);
+    langToggle.addEventListener('click', (event) => {
+      const button = event.target.closest('.lang-btn');
+      if (!button) return;
+      setLanguage(button.dataset.lang);
+    });
+    slidesRoot.addEventListener('click', handleClickNavigation);
+    window.addEventListener('keydown', handleKey);
+    window.addEventListener('hashchange', parseHash);
+
+    renderAll();
+    parseHash();
+    updateActiveNav();
+  </script>
+</body>
+</html>
