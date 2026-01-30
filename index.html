@@ -6,14 +6,16 @@
   <title>Cashback Benchmark</title>
   <style>
     :root {
-      --bg: #f4f6f9;
-      --card: #ffffff;
-      --text: #1b2430;
-      --muted: #5c6b7a;
-      --accent: #3b6ea8;
-      --border: #e3e7ef;
-      --shadow: 0 14px 30px rgba(20, 32, 56, 0.08);
-      --shadow-soft: 0 8px 18px rgba(20, 32, 56, 0.06);
+      --bg: #f4f3ef;
+      --card: #fffdf8;
+      --text: #1f2b2a;
+      --muted: #566461;
+      --accent: #0d8c7c;
+      --accent-soft: #e4f4ef;
+      --accent-warm: #f4b266;
+      --border: #e2e6e0;
+      --shadow: 0 18px 40px rgba(31, 43, 42, 0.12);
+      --shadow-soft: 0 10px 22px rgba(31, 43, 42, 0.08);
     }
 
     * { box-sizing: border-box; }
@@ -23,17 +25,23 @@
       margin: 0;
       color: var(--text);
       background: var(--bg);
-      font-family: "Calibri", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+      font-family: "Gill Sans", "Trebuchet MS", "Verdana", sans-serif;
     }
 
     body {
       display: flex;
       overflow: hidden;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(13, 140, 124, 0.08), transparent 45%),
+        radial-gradient(circle at 85% 15%, rgba(244, 178, 102, 0.14), transparent 50%),
+        radial-gradient(circle at 15% 85%, rgba(13, 140, 124, 0.06), transparent 50%),
+        linear-gradient(120deg, #f7f4ed 0%, #f3f6f1 45%, #f6f4ef 100%);
     }
 
     .sidebar {
       width: 250px;
-      background: #ffffff;
+      background: rgba(255, 253, 248, 0.92);
+      backdrop-filter: blur(12px);
       border-right: 1px solid var(--border);
       padding: 24px 18px;
       display: flex;
@@ -58,6 +66,7 @@
       margin: 0;
       letter-spacing: 0.3px;
       color: var(--text);
+      font-family: "Georgia", "Times New Roman", serif;
     }
 
     .brand p {
@@ -91,13 +100,13 @@
     .nav-list a:hover {
       color: var(--text);
       border-color: var(--border);
-      background: #f7f9fc;
+      background: #f7fbf9;
     }
 
     .nav-list a.active {
       color: var(--text);
-      background: #eef3fb;
-      border-color: #cdd8ea;
+      background: var(--accent-soft);
+      border-color: #c8e3dc;
     }
 
     .sidebar .meta {
@@ -123,7 +132,8 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 24px;
-      background: #ffffff;
+      background: rgba(255, 253, 248, 0.94);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
 
@@ -181,8 +191,8 @@
     }
 
     .btn:hover {
-      background: #f3f6fb;
-      border-color: #cdd8ea;
+      background: var(--accent-soft);
+      border-color: #c8e3dc;
       transform: translateY(-1px);
     }
 
@@ -222,7 +232,7 @@
       gap: 20px;
       padding: 56px 64px;
       border-radius: 18px;
-      background: var(--card);
+      background: linear-gradient(145deg, #fffdf8 0%, #fdf9f2 100%);
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
       align-items: flex-start;
@@ -248,6 +258,7 @@
       font-size: 34px;
       font-weight: 700;
       color: var(--text);
+      font-family: "Georgia", "Times New Roman", serif;
     }
 
     .slide p {
@@ -273,6 +284,7 @@
       font-weight: 700;
       margin: 0;
       color: var(--text);
+      font-family: "Georgia", "Times New Roman", serif;
     }
 
     .agenda-list {
@@ -323,7 +335,7 @@
       width: 132px;
       height: 132px;
       border-radius: 28px;
-      background: #eef4fb;
+      background: var(--accent-soft);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -331,8 +343,8 @@
     }
 
     .diagram-panel.promo .diagram-icon {
-      background: #fff4e6;
-      color: #d08a2d;
+      background: #fff1df;
+      color: #c97722;
     }
 
     .diagram-title {
@@ -354,7 +366,7 @@
       border-radius: 999px;
       font-size: 13px;
       border: 1px solid var(--border);
-      background: #f8fafc;
+      background: #f8faf6;
       color: var(--text);
     }
 
@@ -375,8 +387,8 @@
       margin-top: 8px;
       padding: 10px 14px;
       border-radius: 12px;
-      border: 1px dashed #c9d6e6;
-      background: #f8fafc;
+      border: 1px dashed #cfe0d9;
+      background: #f8faf6;
       font-size: 14px;
       color: var(--text);
       width: 100%;
@@ -398,6 +410,7 @@
       margin: 0;
       font-size: 20px;
       color: var(--text);
+      font-family: "Georgia", "Times New Roman", serif;
     }
 
     .definition-card ul {
@@ -504,13 +517,13 @@
     }
 
     .app-link.primary {
-      background: var(--accent);
+      background: linear-gradient(135deg, var(--accent) 0%, #14a892 100%);
       border-color: var(--accent);
       color: #ffffff;
     }
 
     .app-link:hover {
-      border-color: #c7d5ea;
+      border-color: #c8e3dc;
       box-shadow: var(--shadow-soft);
     }
 
@@ -574,7 +587,7 @@
     .overview-wrap {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px 18px;
+      gap: 12px 16px;
       width: 100%;
       align-content: start;
     }
@@ -590,20 +603,20 @@
     .overview-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
+      gap: 10px;
       width: 100%;
     }
 
     .overview-card {
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 8px;
+      padding: 6px;
       background: #ffffff;
       box-shadow: var(--shadow-soft);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
       text-align: center;
       text-decoration: none;
       color: var(--text);
@@ -612,12 +625,12 @@
 
     .overview-card:hover {
       transform: translateY(-2px);
-      border-color: #c7d5ea;
+      border-color: #c8e3dc;
     }
 
     .overview-logo {
-      width: 66px;
-      height: 50px;
+      width: 58px;
+      height: 44px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -630,29 +643,29 @@
     }
 
     .overview-name {
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 600;
     }
 
     .overview-badge {
-      font-size: 9px;
-      padding: 3px 7px;
+      font-size: 8px;
+      padding: 2px 6px;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: #f8fafc;
+      background: #f8faf6;
       color: var(--text);
     }
 
     .overview-badge.real {
-      border-color: #b8d1f0;
-      color: #2d5b90;
-      background: #eef4fb;
+      border-color: #b9e1d8;
+      color: #147a69;
+      background: #e6f5f0;
     }
 
     .overview-badge.promo {
-      border-color: #f1d6b6;
-      color: #a0671d;
-      background: #fff4e6;
+      border-color: #f2cfad;
+      color: #b1691b;
+      background: #fff1df;
     }
 
     .overview-note {
@@ -669,7 +682,7 @@
 
     .overview-slide .overview-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
+      gap: 8px;
     }
 
     .dots {
@@ -685,8 +698,8 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: #d4dbe7;
-      border: 1px solid #c7cfdd;
+      background: #d8dedc;
+      border: 1px solid #c8d1cd;
       cursor: pointer;
       transition: transform 0.2s ease, background 0.2s ease;
     }
@@ -1335,6 +1348,37 @@
       },
       {
         type: 'app',
+        name: 'Revolut',
+        region: 'europe',
+        regionLabel: { en: 'Europe (Global reference)', fr: 'Europe (référence globale)' },
+        cashbackType: 'real',
+        logo: 'assets/apps/revolut.png',
+        website: 'https://www.revolut.com/',
+        positioning: {
+          en: 'What it is: Global reference for card-linked cashback (benchmark, not a local competitor)',
+          fr: 'Ce que c’est : référence globale du cashback lié à la carte (benchmark, pas un concurrent local)'
+        },
+        mechanics: [
+          { en: 'Earn: card-linked cashback on partner offers', fr: 'Gain : cashback lié à la carte sur offres partenaires' },
+          { en: 'Tracking: card-linked offer validation after merchant confirmation', fr: 'Suivi : validation des offres liées à la carte après confirmation marchand' },
+          { en: 'Redemption: real, withdrawable balance', fr: 'Rachat : solde réel et retirable' }
+        ],
+        business: [
+          { en: 'Funding: merchant-funded offers + interchange', fr: 'Financement : offres financées par marchands + interchange' },
+          { en: 'Revenue: interchange and partner marketing fees', fr: 'Revenus : interchange et frais marketing partenaires' },
+          { en: 'Constraints: offer depth depends on partner coverage', fr: 'Contraintes : profondeur des offres dépend de la couverture partenaires' }
+        ],
+        wins: [
+          { en: 'Benchmark: card-linked offers at scale', fr: 'Référence : offres liées à la carte à grande échelle' },
+          { en: 'UX: cashback appears as cash balance', fr: 'UX : cashback visible comme solde cash' }
+        ],
+        risks: [
+          { en: 'Interchange caps can limit funding', fr: 'Plafonds d’interchange peuvent limiter le financement' },
+          { en: 'Offer availability varies by market', fr: 'Disponibilité des offres varie selon les marchés' }
+        ]
+      },
+      {
+        type: 'app',
         name: 'TopCashback',
         region: 'europe',
         cashbackType: 'real',
@@ -1528,10 +1572,10 @@
       `;
     };
 
-        const renderAppSlide = (slide, index, navTitle) => {
+    const renderAppSlide = (slide, index, navTitle) => {
       const storeUrl = slide.store || slide.website;
       const labels = i18n[currentLang].labels;
-      const regionLabel = i18n[currentLang].regions[slide.region];
+      const regionLabel = slide.regionLabel ? t(slide.regionLabel) : i18n[currentLang].regions[slide.region];
       const mechanics = slide.mechanics.map((item) => `<li>${t(item)}</li>`).join('');
       const business = slide.business.map((item) => `<li>${t(item)}</li>`).join('');
       const wins = slide.wins.map((item) => `<li>${t(item)}</li>`).join('');
@@ -1637,9 +1681,12 @@
       `;
     };
 
-        const renderSlide = (slide, index) => {
+    const renderSlide = (slide, index) => {
+      const regionName = slide.type === 'app'
+        ? (slide.regionLabel ? t(slide.regionLabel) : i18n[currentLang].regions[slide.region])
+        : '';
       const navTitle = slide.navTitle || (slide.type === 'app'
-        ? `${i18n[currentLang].regions[slide.region]} - ${slide.name}`
+        ? `${regionName} - ${slide.name}`
         : t(slide.title) || slide.name || `Slide ${index + 1}`);
       if (slide.type === 'cover') return renderCoverSlide(slide, index, navTitle);
       if (slide.type === 'agenda') return renderAgendaSlide(slide, index, navTitle);
