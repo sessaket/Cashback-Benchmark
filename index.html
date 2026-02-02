@@ -243,9 +243,9 @@
       position: absolute;
       left: 24px;
       bottom: 20px;
-      width: 88px;
+      width: 72px;
       height: auto;
-      opacity: 0.65;
+      opacity: 0.55;
       pointer-events: none;
     }
 
@@ -354,6 +354,30 @@
       margin: 0;
     }
 
+    .definition-badge {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      border: 1px solid var(--border);
+      background: #f8faf6;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .definition-badge.real {
+      background: #e6f5f0;
+      border-color: #b9e1d8;
+      color: #147a69;
+    }
+
+    .definition-badge.promo {
+      background: #fff1df;
+      border-color: #f2cfad;
+      color: #b1691b;
+    }
+
     .diagram-keywords {
       display: flex;
       gap: 10px;
@@ -383,16 +407,40 @@
       margin: 4px 0;
     }
 
-    .key-rule {
-      margin-top: 8px;
-      padding: 10px 14px;
-      border-radius: 12px;
-      border: 1px dashed #cfe0d9;
+    .mini-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .mini-pill {
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      border: 1px solid var(--border);
       background: #f8faf6;
-      font-size: 14px;
       color: var(--text);
-      width: 100%;
-      text-align: center;
+      font-weight: 600;
+    }
+
+    .mini-pill.real {
+      background: var(--accent-soft);
+      border-color: #c8e3dc;
+      color: #145d54;
+    }
+
+    .mini-pill.promo {
+      background: #fff1df;
+      border-color: #f2cfad;
+      color: #8a5717;
+    }
+
+    .mini-arrow {
+      color: var(--muted);
+      font-weight: 700;
     }
 
     .definition-card {
@@ -558,6 +606,13 @@
       line-height: 1.4;
     }
 
+    .study-line.inline {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
     .study-list {
       margin: 0;
       padding-left: 18px;
@@ -568,6 +623,58 @@
 
     .study-list li {
       margin: 4px 0;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .tag.real,
+    .tag.merchant {
+      background: #e6f5f0;
+      color: #147a69;
+      border-color: #b9e1d8;
+    }
+
+    .tag.promo,
+    .tag.issuer {
+      background: #fff1df;
+      color: #b1691b;
+      border-color: #f2cfad;
+    }
+
+    .tag.partner {
+      background: #eef3ff;
+      color: #3b5b9a;
+      border-color: #cdd8ea;
+    }
+
+    .tag.hybrid {
+      background: #f1f3f5;
+      color: #4b5563;
+      border-color: #d6dbe1;
+    }
+
+    .tag.instant {
+      background: #e4f4ef;
+      color: #0d8c7c;
+      border-color: #c8e3dc;
+    }
+
+    .tag.delayed {
+      background: #f7eee4;
+      color: #9a5a2b;
+      border-color: #e7d2bf;
     }
 
     .takeaways-list {
@@ -677,7 +784,7 @@
     }
 
     .overview-slide {
-      gap: 14px;
+      gap: 10px;
     }
 
     .overview-slide .overview-grid {
@@ -685,29 +792,593 @@
       gap: 8px;
     }
 
-    .dots {
-      position: absolute;
-      bottom: -34px;
-      left: 50%;
-      transform: translateX(-50%);
+    .vision-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      width: 100%;
+    }
+
+    .vision-flow {
+      width: 100%;
       display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+
+    .vision-node {
+      padding: 16px 18px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      min-width: 180px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .vision-node.highlight {
+      background: #f4fbf8;
+      border-color: #c8e3dc;
+    }
+
+    .vision-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .vision-arrow {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .flow-diagram {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .flow-step {
+      padding: 18px 20px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      box-shadow: var(--shadow-soft);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      min-width: 170px;
+      max-width: 230px;
+      line-height: 1.35;
+    }
+
+    .flow-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .flow-label {
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .flow-sub {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.3;
+    }
+
+    .flow-arrow {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--accent);
+      opacity: 0.85;
+    }
+
+    .roadmap-grid {
+      width: 100%;
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .roadmap-visual {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .roadmap-track {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      position: relative;
+      margin-bottom: 14px;
+    }
+
+    .roadmap-track::before {
+      display: none;
+    }
+
+    .roadmap-connector {
+      flex: 1;
+      max-width: 90px;
+      min-width: 40px;
+      height: 2px;
+      background: #e2e6e0;
+      position: relative;
+    }
+
+    .roadmap-connector::after {
+      content: '';
+      position: absolute;
+      right: -2px;
+      top: -4px;
+      border: 5px solid transparent;
+      border-left-color: #c8d1cd;
+    }
+
+    .roadmap-node {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .roadmap-dot {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+    }
+
+    .roadmap-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .roadmap-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: #f8faf6;
+      border: 1px solid var(--border);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .roadmap-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 22px;
+      background: #ffffff;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .roadmap-phase {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .roadmap-title {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .roadmap-text {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.45;
+      color: var(--text);
+    }
+
+    .role-card {
+      width: 100%;
+      max-width: 860px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px 26px;
+      background: #ffffff;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-self: center;
+    }
+
+    .role-visual {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .role-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: #f8faf6;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .role-badge-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .role-summary {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .role-pills {
+      display: flex;
+      flex-wrap: wrap;
       gap: 8px;
     }
 
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #d8dedc;
-      border: 1px solid #c8d1cd;
-      cursor: pointer;
-      transition: transform 0.2s ease, background 0.2s ease;
+    .role-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      font-size: 12px;
+      color: var(--text);
+      font-weight: 600;
     }
 
-    .dot.active {
-      background: var(--accent);
-      transform: scale(1.15);
-      border-color: var(--accent);
+    .role-pill-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 8px;
+      background: #eef3ff;
+      color: #3b5b9a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .role-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .role-list {
+      margin: 0;
+      padding-left: 20px;
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .logic-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      width: 100%;
+      flex: 1;
+    }
+
+    .logic-panel {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px 24px;
+      background: #ffffff;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .logic-panel.missions {
+      background: #f4fbf8;
+      border-color: #c8e3dc;
+    }
+
+    .logic-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .logic-flow {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .logic-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .logic-legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      font-weight: 700;
+    }
+
+    .logic-legend-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 6px;
+      background: #f1f3f5;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logic-step {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #f8faf6;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .logic-step-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 8px;
+      background: #f1f3f5;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logic-panel.missions .logic-step {
+      background: #e6f5f0;
+      border-color: #b9e1d8;
+      color: #147a69;
+    }
+
+    .logic-panel.missions .logic-step-icon {
+      background: #e6f5f0;
+      color: #147a69;
+    }
+
+    .logic-arrow {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .logic-callout {
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px dashed #cfe0d9;
+      background: #f8faf6;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .logic-loop {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .logic-loop .loop-pill {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid #b9e1d8;
+      background: #e6f5f0;
+      color: #147a69;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .comparison-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .comparison-legend .tag {
+      font-size: 9px;
+      padding: 2px 6px;
+    }
+
+    .comparison-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.9fr 0.8fr;
+      gap: 6px 8px;
+    }
+
+    .comparison-split {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .comparison-header {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .comparison-cell {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 4px 6px;
+      background: #ffffff;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 10px;
+      color: var(--text);
+    }
+
+    .comparison-cell.compact {
+      justify-content: center;
+      text-align: center;
+    }
+
+    .comparison-app-link {
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s ease, border 0.2s ease;
+    }
+
+    .comparison-app-link:hover {
+      border-color: #c8e3dc;
+      transform: translateY(-1px);
+    }
+
+    .comparison-logo {
+      width: 26px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .comparison-logo img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .comparison-app {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .comparison-name {
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .comparison-region {
+      font-size: 8px;
+      color: var(--muted);
+    }
+
+    .comparison-note {
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+      width: 100%;
+    }
+
+    .logo-wall {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(9, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .logo-wall-item {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 6px;
+      background: #ffffff;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease, border 0.2s ease;
+    }
+
+    .logo-wall-item:hover {
+      transform: translateY(-2px);
+      border-color: #c8e3dc;
+    }
+
+    .logo-wall-item img {
+      max-width: 100%;
+      max-height: 28px;
+      object-fit: contain;
     }
 
     .progress {
@@ -722,6 +1393,22 @@
       .app-logo-card { min-height: 240px; }
       .app-study { padding: 18px; }
       .overview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .vision-grid { grid-template-columns: 1fr; }
+      .vision-flow { flex-direction: column; }
+      .logic-grid { grid-template-columns: 1fr; }
+      .roadmap-grid { grid-template-columns: 1fr; }
+      .roadmap-track { flex-direction: column; gap: 12px; }
+      .roadmap-track::before { display: none; }
+      .roadmap-connector { display: none; }
+      .flow-diagram { flex-direction: column; }
+      .flow-arrow { transform: rotate(90deg); }
+      .role-card { max-width: 100%; }
+      .role-visual { flex-direction: column; align-items: flex-start; }
+      .comparison-grid { grid-template-columns: 1fr; }
+      .comparison-split { grid-template-columns: 1fr; }
+      .comparison-header { display: none; }
+      .comparison-cell.compact { justify-content: flex-start; }
+      .logo-wall { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
 
     @media (max-width: 900px) {
@@ -749,7 +1436,6 @@
       .deck { height: auto; }
       .deck-main { padding: 18px; }
       .stage { width: 100%; }
-      .dots { position: static; transform: none; margin-top: 12px; }
     }
 
     @media print {
@@ -759,7 +1445,7 @@
         overflow: visible;
         display: block;
       }
-      .sidebar, .topbar, .dots { display: none !important; }
+      .sidebar, .topbar { display: none !important; }
       .deck { display: block; height: auto; }
       .deck-main { padding: 0; }
       .stage { width: 100%; aspect-ratio: auto; }
@@ -810,7 +1496,7 @@
     <div class="brand">
       <img class="logo" src="assets/Tomorrow_Systems_Logo.webp" alt="Tomorrow Systems logo" />
       <h1 id="deckTitle">Cashback Benchmark</h1>
-      <p id="deckSubtitle">App-based market scan</p>
+      <p id="deckSubtitle"></p>
     </div>
     <ul class="nav-list" id="slideNav"></ul>
    
@@ -835,7 +1521,6 @@
     <div class="deck-main">
       <div class="stage">
         <div class="slides" id="slidesRoot"></div>
-        <div class="dots" id="dots"></div>
       </div>
     </div>
   </div>
@@ -843,7 +1528,6 @@
   <script>
     const slidesRoot = document.getElementById('slidesRoot');
     const navList = document.getElementById('slideNav');
-    const dots = document.getElementById('dots');
     const title = document.getElementById('slideTitle');
     const progress = document.getElementById('progress');
     const prevBtn = document.getElementById('prevBtn');
@@ -862,11 +1546,19 @@
           wins: 'Why it wins',
           risks: 'Risks',
           website: 'Website',
-          getApp: 'Get the App'
+          getApp: 'Get the App',
+          earn: 'Earn',
+          timing: 'Benefit timing',
+          funding: 'Funding source',
+          type: 'Type',
+          model: 'Cashback model',
+          strengths: 'Strengths',
+          limits: 'Limits',
+          why: 'Why it matters for Missions'
         },
         ui: {
           deckTitle: 'Cashback Benchmark',
-          deckSubtitle: 'App-based market scan',
+          deckSubtitle: '',
           prev: 'Prev',
           next: 'Next',
           fullscreen: 'Fullscreen'
@@ -875,6 +1567,8 @@
           title: 'What we mean by Cashback',
           leftTitle: 'Real Cashback',
           leftKeywords: ['Money back', 'Withdrawable'],
+          leftBadge: 'Permanent balance',
+          leftFlow: ['Spend', 'Cashback', 'Withdrawable wallet'],
           leftBullets: [
             'Definition: user earns real money (redeemable balance).',
             'Source: usually merchant-funded (affiliate/partner payout).',
@@ -883,18 +1577,55 @@
           ],
           rightTitle: 'Promo Rewards',
           rightKeywords: ['Bonus', 'Campaign-based'],
+          rightBadge: 'Temporary rewards',
+          rightFlow: ['Action / Spend', 'Points / Bonus', 'Voucher / Discount'],
           rightBullets: [
             'Definition: campaign incentives (bonus, points, vouchers).',
             'Source: issuer/telco/brand promo budgets.',
             'Tracking: often instant inside app (rules).',
             'Redemption: points/vouchers/discounts; may expire; not always withdrawable.'
           ],
-          keyRule: ' withdrawable money balance = Real Cashback. Time-limited points/vouchers = Promo Rewards.'
+          keyRule: 'Withdrawable money balance = Real Cashback. Time-limited points/vouchers = Promo Rewards.'
+        },
+        modelDescriptions: {
+          real: 'Permanent, withdrawable balance',
+          promo: 'Points/bonuses tied to campaigns'
+        },
+        whyDefaults: {
+          real: [
+            'Shows demand for withdrawable cashback',
+            'Highlights merchant funding + confirmation delays'
+          ],
+          promo: [
+            'Proves campaigns drive fast activation',
+            'Shows engagement is limited without missions'
+          ]
+        },
+        logicLabels: {
+          behavior: 'Behavior',
+          timing: 'Reward timing',
+          engagement: 'Engagement'
         },
         overview: {
           title: 'Apps Overview & Navigation',
-          note: '',
-          badges: { real: 'Real Cashback', promo: 'Promo Rewards' }
+          note: 'Click a logo to open the app slide.',
+          badges: { real: 'Real Cashback', promo: 'Promo Rewards' },
+          headers: {
+            app: 'App',
+            type: 'Type',
+            funding: 'Funding',
+            timing: 'Benefit timing'
+          },
+          legend: {
+            real: 'Real Cashback',
+            promo: 'Promo Rewards',
+            merchant: 'Merchant-funded',
+            issuer: 'Issuer-funded',
+            partner: 'Partner-funded',
+            hybrid: 'Hybrid',
+            instant: 'Instant',
+            delayed: 'Delayed'
+          }
         },
         regions: {
           morocco: 'Morocco',
@@ -911,7 +1642,15 @@
           wins: 'Pourquoi ça marche',
           risks: 'Risques',
           website: 'Site web',
-          getApp: 'Télécharger l’app'
+          getApp: 'Télécharger l’app',
+          earn: 'Gain',
+          timing: 'Moment du gain',
+          funding: 'Source de financement',
+          type: 'Type',
+          model: 'Modèle de cashback',
+          strengths: 'Forces',
+          limits: 'Limites',
+          why: 'Pourquoi c’est clé pour Missions'
         },
         ui: {
           deckTitle: 'Benchmark Cashback',
@@ -924,6 +1663,8 @@
           title: 'Ce que nous entendons par Cashback',
           leftTitle: 'Cashback réel',
           leftKeywords: ['Remboursement', 'Retirable'],
+          leftBadge: 'Solde permanent',
+          leftFlow: ['Dépense', 'Cashback', 'Portefeuille retirable'],
           leftBullets: [
             'Définition : l’utilisateur gagne de l’argent réel (solde récupérable).',
             'Source : généralement financé par les marchands (affiliation/partenaires).',
@@ -932,18 +1673,55 @@
           ],
           rightTitle: 'Récompenses promo',
           rightKeywords: ['Bonus', 'Campagnes'],
+          rightBadge: 'Récompenses temporaires',
+          rightFlow: ['Action / dépense', 'Points / bonus', 'Bon / remise'],
           rightBullets: [
             'Définition : incitations de campagne (bonus, points, bons).',
             'Source : budgets promo émetteur/telco/marque.',
             'Suivi : souvent instantané dans l’app (règles).',
             'Rachat : points/bons/remises ; peut expirer ; pas toujours retirable.'
           ],
-          keyRule: 'solde d’argent retirable = Cashback réel. Points/bons à durée limitée = Récompenses promo.'
+          keyRule: 'Solde d’argent retirable = Cashback réel. Points/bons à durée limitée = Récompenses promo.'
+        },
+        modelDescriptions: {
+          real: 'Solde permanent et retirable',
+          promo: 'Points/bonus liés aux campagnes'
+        },
+        whyDefaults: {
+          real: [
+            'Valide l’intérêt pour un cashback retirable',
+            'Montre la dépendance au financement marchand et aux délais'
+          ],
+          promo: [
+            'Confirme que les campagnes activent vite',
+            'Montre un engagement limité sans missions'
+          ]
+        },
+        logicLabels: {
+          behavior: 'Comportement',
+          timing: 'Moment du gain',
+          engagement: 'Engagement'
         },
         overview: {
           title: 'Aperçu des applications & navigation',
-          note: 'Cliquez sur une application pour accéder à sa fiche d’analyse.',
-          badges: { real: 'Cashback réel', promo: 'Récompenses promo' }
+          note: 'Cliquez sur un logo pour accéder à la fiche de l’app.',
+          badges: { real: 'Cashback réel', promo: 'Récompenses promo' },
+          headers: {
+            app: 'App',
+            type: 'Type',
+            funding: 'Financement',
+            timing: 'Moment du gain'
+          },
+          legend: {
+            real: 'Cashback réel',
+            promo: 'Récompenses promo',
+            merchant: 'Financé par marchands',
+            issuer: 'Financé par émetteur',
+            partner: 'Financé par partenaires',
+            hybrid: 'Hybride',
+            instant: 'Instantané',
+            delayed: 'Différé'
+          }
         },
         regions: {
           morocco: 'Maroc',
@@ -979,6 +1757,15 @@
         name: 'Kenzup',
         region: 'morocco',
         cashbackType: 'real',
+        snapshot: {
+          earn: { en: 'Spend at partner merchants', fr: 'Dépense chez marchands partenaires' },
+          timing: { en: 'Delayed confirmation & cash-out', fr: 'Confirmation & retrait différés' },
+          timingTag: { en: 'Delayed', fr: 'Différé' },
+          timingType: 'delayed',
+          funding: { en: 'Merchant-funded cashback', fr: 'Cashback financé par marchands' },
+          fundingTag: { en: 'Merchant-funded', fr: 'Financé par marchands' },
+          fundingType: 'merchant'
+        },
         logo: 'assets/apps/kenzup.svg',
         website: 'https://www.kenzup.com/',
         store: 'https://play.google.com/store/apps/details?id=com.kenzup.app.prod',
@@ -1010,6 +1797,15 @@
         name: 'inwi money',
         region: 'morocco',
         cashbackType: 'promo',
+        snapshot: {
+          earn: { en: 'Bill pay & partner offers', fr: 'Factures & offres partenaires' },
+          timing: { en: 'Instant wallet credit', fr: 'Crédit wallet instantané' },
+          timingTag: { en: 'Instant', fr: 'Instantané' },
+          timingType: 'instant',
+          funding: { en: 'Issuer-funded promos', fr: 'Promos financées par l’émetteur' },
+          fundingTag: { en: 'Issuer-funded', fr: 'Financé par émetteur' },
+          fundingType: 'issuer'
+        },
         logo: 'assets/apps/inwi-money.png',
         website: 'https://inwimoney.ma/fr/application-mobile',
         store: 'https://play.google.com/store/apps/details?id=ma.inwi.money',
@@ -1041,6 +1837,15 @@
         name: 'Orange Money Maroc',
         region: 'morocco',
         cashbackType: 'promo',
+        snapshot: {
+          earn: { en: 'Bills & merchant offers', fr: 'Factures & offres marchands' },
+          timing: { en: 'Near-instant wallet credit', fr: 'Crédit wallet quasi instantané' },
+          timingTag: { en: 'Instant', fr: 'Instantané' },
+          timingType: 'instant',
+          funding: { en: 'Issuer-funded promos', fr: 'Promos financées par l’émetteur' },
+          fundingTag: { en: 'Issuer-funded', fr: 'Financé par émetteur' },
+          fundingType: 'issuer'
+        },
         logo: 'assets/apps/orange-money.png',
         website: 'https://www.orange.ma/orangemoney',
         store: 'https://play.google.com/store/apps/details?id=com.orange.orangemoney',
@@ -1072,6 +1877,15 @@
         name: 'MT Cash',
         region: 'morocco',
         cashbackType: 'promo',
+        snapshot: {
+          earn: { en: 'Transfers & merchant promos', fr: 'Transferts & promos marchands' },
+          timing: { en: 'Instant wallet credit', fr: 'Crédit wallet instantané' },
+          timingTag: { en: 'Instant', fr: 'Instantané' },
+          timingType: 'instant',
+          funding: { en: 'Issuer-funded promos', fr: 'Promos financées par l’émetteur' },
+          fundingTag: { en: 'Issuer-funded', fr: 'Financé par émetteur' },
+          fundingType: 'issuer'
+        },
         logo: 'assets/apps/mt-cash.png',
         website: 'https://www.mtcash.ma/',
         store: 'https://play.google.com/store/apps/details?id=ma.iam.mtcash',
@@ -1103,6 +1917,15 @@
         name: 'stc pay',
         region: 'arab',
         cashbackType: 'promo',
+        snapshot: {
+          earn: { en: 'Bill pay & merchant offers', fr: 'Factures & offres marchands' },
+          timing: { en: 'Instant wallet credit', fr: 'Crédit wallet instantané' },
+          timingTag: { en: 'Instant', fr: 'Instantané' },
+          timingType: 'instant',
+          funding: { en: 'Issuer-funded promos', fr: 'Promos financées par l’émetteur' },
+          fundingTag: { en: 'Issuer-funded', fr: 'Financé par émetteur' },
+          fundingType: 'issuer'
+        },
         logo: 'assets/apps/stc-pay.png',
         website: 'https://stcbank.com.sa/',
         store: 'https://play.google.com/store/apps/details?id=sa.com.stcpay',
@@ -1134,6 +1957,15 @@
         name: 'Careem Pay',
         region: 'arab',
         cashbackType: 'promo',
+        snapshot: {
+          earn: { en: 'Rides, food & partners', fr: 'Courses, repas & partenaires' },
+          timing: { en: 'Instant wallet credit', fr: 'Crédit wallet instantané' },
+          timingTag: { en: 'Instant', fr: 'Instantané' },
+          timingType: 'instant',
+          funding: { en: 'Hybrid (partner + platform)', fr: 'Hybride (partenaires + plateforme)' },
+          fundingTag: { en: 'Hybrid', fr: 'Hybride' },
+          fundingType: 'hybrid'
+        },
         logo: 'assets/apps/careem.png',
         website: 'https://www.careem.com/en-AE/pay/',
         store: 'https://play.google.com/store/search?q=Careem&c=apps',
@@ -1165,6 +1997,15 @@
         name: 'Smiles',
         region: 'arab',
         cashbackType: 'promo',
+        snapshot: {
+          earn: { en: 'Points at partner merchants', fr: 'Points chez partenaires' },
+          timing: { en: 'Delayed confirmation', fr: 'Confirmation différée' },
+          timingTag: { en: 'Delayed', fr: 'Différé' },
+          timingType: 'delayed',
+          funding: { en: 'Partner-funded rewards', fr: 'Récompenses financées par partenaires' },
+          fundingTag: { en: 'Partner-funded', fr: 'Financé par partenaires' },
+          fundingType: 'partner'
+        },
         logo: 'assets/apps/smiles.png',
         website: 'https://smiles.ae/en/index.html',
         store: 'https://play.google.com/store/apps/details?id=ae.etisalat.smiles',
@@ -1196,6 +2037,15 @@
         name: 'Vodafone Cash',
         region: 'arab',
         cashbackType: 'promo',
+        snapshot: {
+          earn: { en: 'Bill pay & merchant offers', fr: 'Factures & offres marchands' },
+          timing: { en: 'Instant wallet credit', fr: 'Crédit wallet instantané' },
+          timingTag: { en: 'Instant', fr: 'Instantané' },
+          timingType: 'instant',
+          funding: { en: 'Issuer-funded promos', fr: 'Promos financées par l’émetteur' },
+          fundingTag: { en: 'Issuer-funded', fr: 'Financé par émetteur' },
+          fundingType: 'issuer'
+        },
         logo: 'assets/apps/vodafone-cash.png',
         website: 'https://web.vodafone.com.eg/en/vodafone-cash',
         store: 'https://play.google.com/store/search?q=Vodafone%20Cash&c=apps',
@@ -1227,6 +2077,15 @@
         name: 'M-Pesa',
         region: 'africa',
         cashbackType: 'promo',
+        snapshot: {
+          earn: { en: 'Bill pay & merchant pay', fr: 'Factures & paiements marchands' },
+          timing: { en: 'Instant wallet credit', fr: 'Crédit wallet instantané' },
+          timingTag: { en: 'Instant', fr: 'Instantané' },
+          timingType: 'instant',
+          funding: { en: 'Issuer-funded promos', fr: 'Promos financées par l’émetteur' },
+          fundingTag: { en: 'Issuer-funded', fr: 'Financé par émetteur' },
+          fundingType: 'issuer'
+        },
         logo: 'assets/apps/mpesa.png',
         website: 'https://www.safaricom.co.ke/',
         store: 'https://play.google.com/store/apps/details?id=com.safaricom.mpesa.lifestyle',
@@ -1258,6 +2117,15 @@
         name: 'OPay',
         region: 'africa',
         cashbackType: 'promo',
+        snapshot: {
+          earn: { en: 'Bills, transfers & merchants', fr: 'Factures, transferts & marchands' },
+          timing: { en: 'Instant wallet credit', fr: 'Crédit wallet instantané' },
+          timingTag: { en: 'Instant', fr: 'Instantané' },
+          timingType: 'instant',
+          funding: { en: 'Issuer-funded promos', fr: 'Promos financées par l’émetteur' },
+          fundingTag: { en: 'Issuer-funded', fr: 'Financé par émetteur' },
+          fundingType: 'issuer'
+        },
         logo: 'assets/apps/opay.png',
         website: 'https://www.opay.ng/',
         store: 'https://play.google.com/store/apps/details?id=team.opay.pay',
@@ -1289,6 +2157,15 @@
         name: 'PalmPay',
         region: 'africa',
         cashbackType: 'promo',
+        snapshot: {
+          earn: { en: 'Bills & in-app pay', fr: 'Factures & paiements in-app' },
+          timing: { en: 'Instant wallet credit', fr: 'Crédit wallet instantané' },
+          timingTag: { en: 'Instant', fr: 'Instantané' },
+          timingType: 'instant',
+          funding: { en: 'Issuer-funded promos', fr: 'Promos financées par l’émetteur' },
+          fundingTag: { en: 'Issuer-funded', fr: 'Financé par émetteur' },
+          fundingType: 'issuer'
+        },
         logo: 'assets/apps/palmpay.png',
         website: 'https://www.palmpay.com/',
         store: 'https://play.google.com/store/apps/details?id=com.transsnet.palmpay',
@@ -1320,6 +2197,15 @@
         name: 'Airtel Money',
         region: 'africa',
         cashbackType: 'promo',
+        snapshot: {
+          earn: { en: 'Airtime & bill promos', fr: 'Airtime & promos factures' },
+          timing: { en: 'Instant wallet credit', fr: 'Crédit wallet instantané' },
+          timingTag: { en: 'Instant', fr: 'Instantané' },
+          timingType: 'instant',
+          funding: { en: 'Issuer-funded promos', fr: 'Promos financées par l’émetteur' },
+          fundingTag: { en: 'Issuer-funded', fr: 'Financé par émetteur' },
+          fundingType: 'issuer'
+        },
         logo: 'assets/apps/airtel-money.svg',
         website: 'https://www.airtel.africa/',
         store: 'https://play.google.com/store/search?q=Airtel%20Money&c=apps',
@@ -1352,6 +2238,15 @@
         region: 'europe',
         regionLabel: { en: 'Europe (Global reference)', fr: 'Europe (référence globale)' },
         cashbackType: 'real',
+        snapshot: {
+          earn: { en: 'Card-linked partner offers', fr: 'Offres partenaires liées à la carte' },
+          timing: { en: 'Delayed after merchant confirmation', fr: 'Différé après confirmation marchand' },
+          timingTag: { en: 'Delayed', fr: 'Différé' },
+          timingType: 'delayed',
+          funding: { en: 'Merchant-funded + interchange', fr: 'Marchands + interchange' },
+          fundingTag: { en: 'Hybrid', fr: 'Hybride' },
+          fundingType: 'hybrid'
+        },
         logo: 'assets/apps/revolut.png',
         website: 'https://www.revolut.com/',
         positioning: {
@@ -1382,6 +2277,15 @@
         name: 'TopCashback',
         region: 'europe',
         cashbackType: 'real',
+        snapshot: {
+          earn: { en: 'Affiliate retailer spend', fr: 'Dépense marchands affiliés' },
+          timing: { en: 'Delayed confirmation', fr: 'Confirmation différée' },
+          timingTag: { en: 'Delayed', fr: 'Différé' },
+          timingType: 'delayed',
+          funding: { en: 'Merchant-funded', fr: 'Financé par marchands' },
+          fundingTag: { en: 'Merchant-funded', fr: 'Financé par marchands' },
+          fundingType: 'merchant'
+        },
         logo: 'assets/apps/topcashback.png',
         website: 'https://www.topcashback.co.uk/',
         store: 'https://play.google.com/store/apps/details?id=com.topcashback.topcashback',
@@ -1413,6 +2317,15 @@
         name: 'iGraal',
         region: 'europe',
         cashbackType: 'real',
+        snapshot: {
+          earn: { en: 'Affiliate spend via app', fr: 'Dépense via app affiliée' },
+          timing: { en: 'Delayed confirmation', fr: 'Confirmation différée' },
+          timingTag: { en: 'Delayed', fr: 'Différé' },
+          timingType: 'delayed',
+          funding: { en: 'Merchant-funded', fr: 'Financé par marchands' },
+          fundingTag: { en: 'Merchant-funded', fr: 'Financé par marchands' },
+          fundingType: 'merchant'
+        },
         logo: 'assets/apps/igraal.png',
         website: 'https://www.igraal.com/',
         store: 'https://play.google.com/store/apps/details?id=fr.snapp.igraal',
@@ -1444,6 +2357,15 @@
         name: 'PAYBACK',
         region: 'europe',
         cashbackType: 'promo',
+        snapshot: {
+          earn: { en: 'Points at partner merchants', fr: 'Points chez partenaires' },
+          timing: { en: 'Delayed points credit', fr: 'Crédit de points différé' },
+          timingTag: { en: 'Delayed', fr: 'Différé' },
+          timingType: 'delayed',
+          funding: { en: 'Merchant-funded points', fr: 'Points financés par marchands' },
+          fundingTag: { en: 'Merchant-funded', fr: 'Financé par marchands' },
+          fundingType: 'merchant'
+        },
         logo: 'assets/apps/payback.png',
         website: 'https://www.payback.de/',
         store: 'https://play.google.com/store/apps/details?id=at.payback.client.android',
@@ -1475,6 +2397,15 @@
         name: 'myWorld / Cashback World',
         region: 'europe',
         cashbackType: 'real',
+        snapshot: {
+          earn: { en: 'Spend online/offline partners', fr: 'Dépense partenaires online/offline' },
+          timing: { en: 'Delayed confirmation', fr: 'Confirmation différée' },
+          timingTag: { en: 'Delayed', fr: 'Différé' },
+          timingType: 'delayed',
+          funding: { en: 'Merchant-funded', fr: 'Financé par marchands' },
+          fundingTag: { en: 'Merchant-funded', fr: 'Financé par marchands' },
+          fundingType: 'merchant'
+        },
         logo: 'assets/apps/cashback-world.png',
         website: 'https://www.myworld-app.com/',
         store: 'https://play.google.com/store/search?q=myWorld%20cashback&c=apps',
@@ -1504,6 +2435,119 @@
       {
         type: 'overview',
         title: { en: 'Apps Overview & Navigation', fr: 'Aperçu des applications & navigation' }
+      },
+      {
+        type: 'logic',
+        title: { en: 'Benchmark logic: Passive spend vs Missions', fr: 'Logique benchmark : dépense passive vs Missions' },
+        left: {
+          title: { en: 'Cashback apps (passive spend)', fr: 'Apps cashback (dépense passive)' },
+          steps: [
+            { en: 'Spend', fr: 'Dépense' },
+            { en: 'Track & approve', fr: 'Suivi & validation' },
+            { en: 'Cash-out (delayed)', fr: 'Retrait (différé)' }
+          ],
+          callout: { en: 'Reward follows spend → weak engagement loop', fr: 'Récompense après dépense → engagement limité' }
+        },
+        right: {
+          title: { en: 'Missions (engagement-driven)', fr: 'Missions (engagement)' },
+          steps: [
+            { en: 'Complete action', fr: 'Action accomplie' },
+            { en: 'Instant reward', fr: 'Récompense immédiate' },
+            { en: 'Return & repeat', fr: 'Retour & répétition' }
+          ],
+          callout: { en: 'Action → reward → return builds habits', fr: 'Action → récompense → retour crée l’habitude' },
+          loop: [
+            { en: 'Action', fr: 'Action' },
+            { en: 'Reward', fr: 'Récompense' },
+            { en: 'Return', fr: 'Retour' }
+          ]
+        }
+      },
+      {
+        type: 'vision',
+        title: { en: 'From Cashback Apps → Missions Rewards Engine', fr: 'Des apps cashback → Missions Rewards Engine' },
+        flow: [
+          { en: 'Benchmark insights', fr: 'Insights du benchmark' },
+          { en: 'Missions Rewards Engine', fr: 'Moteur de récompenses Missions' },
+          { en: 'Habit loops', fr: 'Boucles d’habitudes' }
+        ],
+        left: {
+          title: { en: 'Benchmark insights', fr: 'Enseignements du benchmark' },
+          items: [
+            { en: 'Rewards are tied to spend and often arrive later', fr: 'Les récompenses sont liées à la dépense et arrivent souvent plus tard' },
+            { en: 'Engagement is mostly passive (browse, wait, redeem)', fr: 'L’engagement reste passif (parcourir, attendre, racheter)' },
+            { en: 'Merchant-funded value is strong but not always sticky', fr: 'La valeur financée par les marchands est forte mais peu fidélisante' }
+          ]
+        },
+        right: {
+          title: { en: 'Missions product vision', fr: 'Vision produit Missions' },
+          items: [
+            { en: 'Missions turn rewards into actions and habits', fr: 'Les missions transforment les récompenses en actions et habitudes' },
+            { en: 'Instant feedback: do a mission → earn immediately', fr: 'Retour immédiat : mission accomplie → gain immédiat' },
+            { en: 'Engagement-led loops before spending', fr: 'Boucles d’engagement avant la dépense' }
+          ]
+        },
+        highlight: { en: 'Engagement-driven rewards: missions/actions vs passive spend', fr: 'Récompenses par engagement : missions/actions vs dépense passive' }
+      },
+      {
+        type: 'architecture',
+        title: { en: 'High-Level Architecture ', fr: 'Architecture haut niveau ' },
+        nodes: [
+          { en: 'Missions App', fr: 'App Missions' },
+          { en: 'Rewards Engine', fr: 'Moteur de récompenses' },
+          { en: 'Cashback Logic', fr: 'Logique cashback' },
+          { en: 'Wallet / Partners / Future Card', fr: 'Portefeuille / Partenaires / Future carte' }
+        ],
+        nodeSubs: [
+          { en: 'User actions & missions', fr: 'Actions & missions utilisateur' },
+          { en: 'Rules, scoring, rewards', fr: 'Règles, scoring, récompenses' },
+          { en: 'Cashback rules & funding', fr: 'Règles cashback & financement' },
+          { en: 'Payouts, partners, card', fr: 'Paiements, partenaires, carte' }
+        ]
+      },
+      {
+        type: 'roadmap',
+        title: { en: 'Cashback Integration Roadmap', fr: 'Feuille de route intégration cashback' },
+        phases: [
+          {
+            phase: { en: 'Phase 1', fr: 'Phase 1' },
+            title: { en: 'Internal balance (points / rewards)', fr: 'Solde interne (points / récompenses)' },
+            text: { en: 'Closed-loop balance to reward missions immediately', fr: 'Solde en circuit fermé pour récompenser les missions immédiatement' }
+          },
+          {
+            phase: { en: 'Phase 2', fr: 'Phase 2' },
+            title: { en: 'Merchant-funded cashback', fr: 'Cashback financé par les marchands' },
+            text: { en: 'Partner programs funding cash rewards at scale', fr: 'Programmes partenaires finançant des récompenses cash à l’échelle' }
+          },
+          {
+            phase: { en: 'Phase 3', fr: 'Phase 3' },
+            title: { en: 'External wallet / card (Revolut-inspired)', fr: 'Portefeuille externe / carte (inspiré de Revolut)' },
+            text: { en: 'Extend rewards into everyday payments', fr: 'Étendre les récompenses aux paiements du quotidien' }
+          }
+        ]
+      },
+      {
+        type: 'role',
+        title: { en: 'Role & Ownership', fr: 'Rôle & responsabilités' },
+        roleTitle: { en: 'Architect & Project Manager', fr: 'Architecte & Chef de projet' },
+        roleSummary: {
+          en: 'Strategic ownership across product, architecture, and delivery',
+          fr: 'Responsabilité stratégique produit, architecture et delivery'
+        },
+        highlights: [
+          { icon: 'insight', label: { en: 'Market study', fr: 'Étude de marché' } },
+          { icon: 'missions', label: { en: 'Product vision', fr: 'Vision produit' } },
+          { icon: 'engine', label: { en: 'Architecture', fr: 'Architecture' } },
+          { icon: 'card', label: { en: 'Roadmap', fr: 'Feuille de route' } },
+          { icon: 'handshake', label: { en: 'Coordination', fr: 'Coordination' } }
+        ],
+        items: [
+          { en: 'Market study & competitive benchmark', fr: 'Étude de marché & benchmark concurrentiel' },
+          { en: 'Product vision & missions positioning', fr: 'Vision produit & positionnement des missions' },
+          { en: 'High-level architecture & rewards flow', fr: 'Architecture haut niveau & flux de récompenses' },
+          { en: 'Cashback roadmap & sequencing', fr: 'Feuille de route cashback & séquencement' },
+          { en: 'Coordination across teams and partners', fr: 'Coordination des équipes et partenaires' }
+        ]
       }
     ];
 
@@ -1514,6 +2558,7 @@
         <section class="slide cover" id="slide-${index + 1}" data-title="${navTitle}">
           <img class="cover-logo" src="assets/Tomorrow_Systems_Logo.webp" alt="Tomorrow Systems logo" />
           <h1 class="cover-title">${slide.coverTitle}</h1>
+          ${watermark}
         </section>
       `;
     };
@@ -1529,14 +2574,20 @@
       `;
     };
 
-        const renderDefinitionSlide = (slide, index, navTitle) => {
+    const renderDefinitionSlide = (slide, index, navTitle) => {
       const def = i18n[currentLang].definition;
       const leftKeywords = def.leftKeywords.map((item) => `<span>${item}</span>`).join('');
       const rightKeywords = def.rightKeywords.map((item) => `<span>${item}</span>`).join('');
       const leftBullets = def.leftBullets.map((item) => `<li>${item}</li>`).join('');
       const rightBullets = def.rightBullets.map((item) => `<li>${item}</li>`).join('');
+      const leftFlow = def.leftFlow.map((item, idx) => `
+        <span class="mini-pill real">${item}</span>${idx < def.leftFlow.length - 1 ? '<span class="mini-arrow">&rarr;</span>' : ''}
+      `).join('');
+      const rightFlow = def.rightFlow.map((item, idx) => `
+        <span class="mini-pill promo">${item}</span>${idx < def.rightFlow.length - 1 ? '<span class="mini-arrow">&rarr;</span>' : ''}
+      `).join('');
       return `
-        <section class=\"slide\" id=\"slide-${index + 1}\" data-title=\"${navTitle}\">
+        <section class=\"slide app-slide\" id=\"slide-${index + 1}\" data-title=\"${navTitle}\">
           <h2>${t(slide.title)}</h2>
           <div class=\"cashback-diagram\">
             <div class=\"diagram-panel\">
@@ -1550,7 +2601,9 @@
                 </svg>
               </div>
               <div class=\"diagram-title\">${def.leftTitle}</div>
+              <div class=\"definition-badge real\">${def.leftBadge}</div>
               <div class=\"diagram-keywords\">${leftKeywords}</div>
+              <div class=\"mini-flow\">${leftFlow}</div>
               <ul class=\"diagram-bullets\">${leftBullets}</ul>
             </div>
             <div class=\"diagram-panel promo\">
@@ -1562,24 +2615,86 @@
                 </svg>
               </div>
               <div class=\"diagram-title\">${def.rightTitle}</div>
+              <div class=\"definition-badge promo\">${def.rightBadge}</div>
               <div class=\"diagram-keywords\">${rightKeywords}</div>
+              <div class=\"mini-flow\">${rightFlow}</div>
               <ul class=\"diagram-bullets\">${rightBullets}</ul>
             </div>
           </div>
-          <div class=\"key-rule\">${def.keyRule}</div>
           ${watermark}
         </section>
       `;
+    };
+
+    const iconSet = {
+      earn: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle></svg>',
+      instant: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"></path></svg>',
+      delayed: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>',
+      merchant: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18l-2-5H5l-2 5z"></path><path d="M4 9v10h16V9"></path><path d="M9 19v-6h6v6"></path></svg>',
+      issuer: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6"></path><path d="M4 10v9h16v-9"></path><path d="M8 19v-6"></path><path d="M12 19v-6"></path><path d="M16 19v-6"></path></svg>',
+      partner: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 1 0-7l2-2a5 5 0 0 1 7 7l-1 1"></path><path d="M14 11a5 5 0 0 1 0 7l-2 2a5 5 0 0 1-7-7l1-1"></path></svg>',
+      hybrid: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="12" r="5"></circle><circle cx="15" cy="12" r="5"></circle></svg>',
+      insight: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M7 14l4-4 3 3 5-6"></path></svg>',
+      missions: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h9l5 5v13H5z"></path><path d="M14 3v5h5"></path><path d="M8 13l2 2 4-4"></path></svg>',
+      loop: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15.5-6.4"></path><path d="M19 3v5h-5"></path><path d="M21 12a9 9 0 0 1-15.5 6.4"></path><path d="M5 21v-5h5"></path></svg>',
+      app: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"></rect><path d="M11 19h2"></path></svg>',
+      engine: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.8 1.8 0 0 0 .4 2l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.8 1.8 0 0 0-2-.4 1.8 1.8 0 0 0-1 1.6V22a2 2 0 1 1-4 0v-.1a1.8 1.8 0 0 0-1-1.6 1.8 1.8 0 0 0-2 .4l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.8 1.8 0 0 0 .4-2 1.8 1.8 0 0 0-1.6-1H2a2 2 0 1 1 0-4h.1a1.8 1.8 0 0 0 1.6-1 1.8 1.8 0 0 0-.4-2l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.8 1.8 0 0 0 2 .4H9a1.8 1.8 0 0 0 1-1.6V2a2 2 0 1 1 4 0v.1a1.8 1.8 0 0 0 1 1.6 1.8 1.8 0 0 0 2-.4l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.8 1.8 0 0 0-.4 2V9a1.8 1.8 0 0 0 1.6 1H22a2 2 0 1 1 0 4h-.1a1.8 1.8 0 0 0-1.6 1z"></path></svg>',
+      cashback: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M7 9h4"></path><path d="M7 13h6"></path><circle cx="17" cy="12" r="2"></circle></svg>',
+      wallet: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H3z"></path><path d="M3 7V5a2 2 0 0 1 2-2h14"></path><circle cx="17" cy="12" r="1.5"></circle></svg>',
+      points: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 5 5.5.8-4 3.9.9 5.6L12 15.9 7.1 17.3l.9-5.6-4-3.9L9.5 7z"></path></svg>',
+      handshake: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 11l2-2a3 3 0 0 1 4 4l-5 5a4 4 0 0 1-6 0l-1-1"></path><path d="M8 13l-2 2a3 3 0 0 1-4-4l5-5a4 4 0 0 1 6 0l1 1"></path></svg>',
+      card: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 10h18"></path><path d="M7 15h4"></path></svg>',
+      behavior: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 20a8 8 0 0 1 16 0"></path></svg>',
+      leader: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16"></path><path d="M4 4h12l-2.5 4L16 12H4"></path></svg>'
+    };
+
+    const getTimingIcon = (type) => (type === 'instant' ? iconSet.instant : iconSet.delayed);
+    const getFundingIcon = (type) => iconSet[type] || iconSet.merchant;
+
+    const appTypeMap = {
+      'Kenzup': { en: 'Cashback wallet', fr: 'Portefeuille cashback' },
+      'inwi money': { en: 'Wallet', fr: 'Portefeuille' },
+      'Orange Money Maroc': { en: 'Wallet', fr: 'Portefeuille' },
+      'MT Cash': { en: 'Wallet', fr: 'Portefeuille' },
+      'stc pay': { en: 'Wallet', fr: 'Portefeuille' },
+      'Careem Pay': { en: 'Super-app wallet', fr: 'Portefeuille super-app' },
+      'Smiles': { en: 'Rewards super-app', fr: 'Super-app de récompenses' },
+      'Vodafone Cash': { en: 'Wallet', fr: 'Portefeuille' },
+      'M-Pesa': { en: 'Wallet ecosystem', fr: 'Écosystème wallet' },
+      'OPay': { en: 'Wallet', fr: 'Portefeuille' },
+      'PalmPay': { en: 'Wallet', fr: 'Portefeuille' },
+      'Airtel Money': { en: 'Telco wallet', fr: 'Portefeuille télécom' },
+      'Revolut': { en: 'Neobank / card app', fr: 'Néobanque / app carte' },
+      'TopCashback': { en: 'Cashback portal', fr: 'Portail cashback' },
+      'iGraal': { en: 'Cashback portal', fr: 'Portail cashback' },
+      'PAYBACK': { en: 'Coalition loyalty', fr: 'Coalition de fidélité' },
+      'myWorld / Cashback World': { en: 'Cashback network', fr: 'Réseau cashback' }
+    };
+
+    const stripTypePrefix = (value) => {
+      const text = value || '';
+      return text
+        .replace(/^What it is:\s*/i, '')
+        .replace(/^Ce que c’est\s*:\s*/i, '')
+        .trim();
     };
 
     const renderAppSlide = (slide, index, navTitle) => {
       const storeUrl = slide.store || slide.website;
       const labels = i18n[currentLang].labels;
       const regionLabel = slide.regionLabel ? t(slide.regionLabel) : i18n[currentLang].regions[slide.region];
-      const mechanics = slide.mechanics.map((item) => `<li>${t(item)}</li>`).join('');
-      const business = slide.business.map((item) => `<li>${t(item)}</li>`).join('');
-      const wins = slide.wins.map((item) => `<li>${t(item)}</li>`).join('');
-      const risks = slide.risks.map((item) => `<li>${t(item)}</li>`).join('');
+      const typeLine = stripTypePrefix(t(appTypeMap[slide.name] || slide.appType || slide.positioning));
+      const modelTag = i18n[currentLang].overview.badges[slide.cashbackType] || '';
+      const modelDescription = i18n[currentLang].modelDescriptions[slide.cashbackType] || '';
+      const strengths = (slide.strengths || slide.wins || []).map((item) => `<li>${t(item)}</li>`).join('');
+      const limits = (slide.limits || slide.risks || []).map((item) => `<li>${t(item)}</li>`).join('');
+      const whyItems = (slide.why || i18n[currentLang].whyDefaults[slide.cashbackType] || [])
+        .map((item) => `<li>${t(item)}</li>`).join('');
+      const snapshot = slide.snapshot || {};
+      const timingType = snapshot.timingType || 'delayed';
+      const fundingType = snapshot.fundingType || 'merchant';
+      const timingTag = snapshot.timingTag ? t(snapshot.timingTag) : '';
+      const fundingTag = snapshot.fundingTag ? t(snapshot.fundingTag) : '';
       return `
         <section class=\"slide\" id=\"slide-${index + 1}\" data-title=\"${navTitle}\">
           <div class=\"app-header\">
@@ -1603,24 +2718,27 @@
             </div>
             <div class=\"app-study\">
               <div class=\"study-section\">
-                <div class=\"study-title\">${labels.positioning}</div>
-                <div class=\"study-line\">${t(slide.positioning)}</div>
+                <div class=\"study-title\">${labels.type}</div>
+                <div class=\"study-line\">${typeLine}</div>
               </div>
               <div class=\"study-section\">
-                <div class=\"study-title\">${labels.mechanics}</div>
-                <ul class=\"study-list\">${mechanics}</ul>
+                <div class=\"study-title\">${labels.model}</div>
+                <div class=\"study-line inline\">
+                  <span class=\"tag ${slide.cashbackType}\">${modelTag}</span>
+                  <span>${modelDescription}</span>
+                </div>
               </div>
               <div class=\"study-section\">
-                <div class=\"study-title\">${labels.business}</div>
-                <ul class=\"study-list\">${business}</ul>
+                <div class=\"study-title\">${labels.strengths}</div>
+                <ul class=\"study-list\">${strengths}</ul>
               </div>
               <div class=\"study-section\">
-                <div class=\"study-title\">${labels.wins}</div>
-                <ul class=\"study-list\">${wins}</ul>
+                <div class=\"study-title\">${labels.limits}</div>
+                <ul class=\"study-list\">${limits}</ul>
               </div>
               <div class=\"study-section\">
-                <div class=\"study-title\">${labels.risks}</div>
-                <ul class=\"study-list\">${risks}</ul>
+                <div class=\"study-title\">${labels.why}</div>
+                <ul class=\"study-list\">${whyItems}</ul>
               </div>
             </div>
           </div>
@@ -1640,42 +2758,270 @@
       `;
     };
 
-        const renderOverviewSlide = (slide, index, navTitle) => {
-      const regionOrder = ['morocco', 'arab', 'africa', 'europe'];
+    const renderLogicSlide = (slide, index, navTitle) => {
+      const legend = i18n[currentLang].logicLabels;
+      const legendItems = [
+        { label: legend.behavior, icon: iconSet.behavior },
+        { label: legend.timing, icon: iconSet.delayed },
+        { label: legend.engagement, icon: iconSet.loop }
+      ];
+      const legendRow = legendItems.map((item) => `
+        <div class="logic-legend-item">
+          <span class="logic-legend-icon">${item.icon}</span>
+          ${item.label}
+        </div>
+      `).join('');
+      const leftIcons = [iconSet.cashback, iconSet.delayed, iconSet.wallet];
+      const rightIcons = [iconSet.missions, iconSet.instant, iconSet.loop];
+      const leftSteps = slide.left.steps.map((item, idx) => `
+        <span class="logic-step">
+          <span class="logic-step-icon">${leftIcons[idx] || iconSet.cashback}</span>
+          ${t(item)}
+        </span>${idx < slide.left.steps.length - 1 ? '<span class="logic-arrow">&rarr;</span>' : ''}
+      `).join('');
+      const rightSteps = slide.right.steps.map((item, idx) => `
+        <span class="logic-step">
+          <span class="logic-step-icon">${rightIcons[idx] || iconSet.missions}</span>
+          ${t(item)}
+        </span>${idx < slide.right.steps.length - 1 ? '<span class="logic-arrow">&rarr;</span>' : ''}
+      `).join('');
+      const loopItems = slide.right.loop.map((item, idx) => `
+        <span class="loop-pill">${t(item)}</span>${idx < slide.right.loop.length - 1 ? '<span class="logic-arrow">&rarr;</span>' : ''}
+      `).join('');
+      return `
+        <section class="slide" id="slide-${index + 1}" data-title="${navTitle}">
+          <h2>${t(slide.title)}</h2>
+          <div class="logic-legend">${legendRow}</div>
+          <div class="logic-grid">
+            <div class="logic-panel">
+              <div class="logic-title">${t(slide.left.title)}</div>
+              <div class="logic-flow">${leftSteps}</div>
+              <div class="logic-callout">${t(slide.left.callout)}</div>
+            </div>
+            <div class="logic-panel missions">
+              <div class="logic-title">${t(slide.right.title)}</div>
+              <div class="logic-flow">${rightSteps}</div>
+              <div class="logic-loop">${loopItems}</div>
+              <div class="logic-callout">${t(slide.right.callout)}</div>
+            </div>
+          </div>
+          ${watermark}
+        </section>
+      `;
+    };
+
+    const renderOverviewSlide = (slide, index, navTitle) => {
       const appSlides = slideData
         .map((item, idx) => ({ ...item, slideIndex: idx + 1 }))
         .filter((item) => item.type === 'app');
 
-      const groups = regionOrder.map((regionKey) => {
-        const apps = appSlides.filter((item) => item.region === regionKey);
-        if (!apps.length) return '';
-        const cards = apps.map((app) => {
-          const badgeText = i18n[currentLang].overview.badges[app.cashbackType];
-          const badgeClass = app.cashbackType === 'real' ? 'real' : 'promo';
+      const headers = i18n[currentLang].overview.headers;
+      const legend = i18n[currentLang].overview.legend;
+      const legendItems = [
+        { key: 'real', className: 'real' },
+        { key: 'promo', className: 'promo' },
+        { key: 'merchant', className: 'merchant' },
+        { key: 'issuer', className: 'issuer' },
+        { key: 'partner', className: 'partner' },
+        { key: 'hybrid', className: 'hybrid' },
+        { key: 'instant', className: 'instant' },
+        { key: 'delayed', className: 'delayed' }
+      ];
+      const legendTags = legendItems.map((item) => `
+        <span class="tag ${item.className}">${legend[item.key]}</span>
+      `).join('');
+
+      const renderGrid = (apps) => {
+        const rows = apps.map((app) => {
+          const regionLabel = app.regionLabel ? t(app.regionLabel) : i18n[currentLang].regions[app.region];
+          const typeTag = i18n[currentLang].overview.badges[app.cashbackType];
+          const fundingType = app.snapshot?.fundingType || 'merchant';
+          const timingType = app.snapshot?.timingType || 'delayed';
+          const fundingTag = app.snapshot?.fundingTag ? t(app.snapshot.fundingTag) : legend[fundingType];
+          const timingTag = app.snapshot?.timingTag ? t(app.snapshot.timingTag) : legend[timingType];
           return `
-            <a class=\"overview-card\" href=\"#slide-${app.slideIndex}\">
-              <div class=\"overview-logo\">
-                <img src=\"${app.logo}\" alt=\"${app.name} logo\" />
+            <a class="comparison-cell comparison-app-link" href="#slide-${app.slideIndex}">
+              <div class="comparison-logo">
+                <img src="${app.logo}" alt="${app.name} logo" />
               </div>
-              <div class=\"overview-name\">${app.name}</div>
-              <div class=\"overview-badge ${badgeClass}\">${badgeText}</div>
+              <div class="comparison-app">
+                <div class="comparison-name">${app.name}</div>
+                <div class="comparison-region">${regionLabel}</div>
+              </div>
             </a>
+            <div class="comparison-cell compact">
+              <span class="tag ${app.cashbackType}">${typeTag}</span>
+            </div>
+            <div class="comparison-cell compact">
+              <span class="tag ${fundingType}">${fundingTag}</span>
+            </div>
+            <div class="comparison-cell compact">
+              <span class="tag ${timingType}">${timingTag}</span>
+            </div>
           `;
         }).join('');
-
         return `
-          <div class=\"overview-group\">
-            <div class=\"overview-heading\">${i18n[currentLang].regions[regionKey]}</div>
-            <div class=\"overview-grid\">${cards}</div>
+          <div class="comparison-grid" role="table">
+            <div class="comparison-header">${headers.app}</div>
+            <div class="comparison-header">${headers.type}</div>
+            <div class="comparison-header">${headers.funding}</div>
+            <div class="comparison-header">${headers.timing}</div>
+            ${rows}
           </div>
         `;
-      }).join('');
+      };
+
+      const midpoint = Math.ceil(appSlides.length / 2);
+      const leftApps = appSlides.slice(0, midpoint);
+      const rightApps = appSlides.slice(midpoint);
+      const logoWall = appSlides.map((app) => `
+        <a class="logo-wall-item" href="#slide-${app.slideIndex}">
+          <img src="${app.logo}" alt="${app.name} logo" />
+        </a>
+      `).join('');
 
       return `
-        <section class=\"slide overview-slide\" id=\"slide-${index + 1}\" data-title=\"${navTitle}\">
+        <section class="slide overview-slide" id="slide-${index + 1}" data-title="${navTitle}">
           <h2>${t(slide.title)}</h2>
-          <div class=\"overview-wrap\">${groups}</div>
-          <div class=\"overview-note\">${i18n[currentLang].overview.note}</div>
+          <div class="comparison-legend">${legendTags}</div>
+          <div class="comparison-split">
+            ${renderGrid(leftApps)}
+            ${renderGrid(rightApps)}
+          </div>
+          <div class="logo-wall">
+            ${logoWall}
+          </div>
+          <div class="comparison-note">${i18n[currentLang].overview.note}</div>
+          ${watermark}
+        </section>
+      `;
+    };
+
+    const renderVisionSlide = (slide, index, navTitle) => {
+      const leftItems = slide.left.items.map((item) => `<li>${t(item)}</li>`).join('');
+      const rightItems = slide.right.items.map((item) => `<li>${t(item)}</li>`).join('');
+      const flowIcons = [iconSet.insight, iconSet.missions, iconSet.loop];
+      const flowNodes = (slide.flow || []).map((item, idx) => {
+        const icon = flowIcons[idx] || iconSet.insight;
+        const highlight = idx === 1 ? ' highlight' : '';
+        const node = `
+          <div class="vision-node${highlight}">
+            <div class="vision-icon">${icon}</div>
+            <div>${t(item)}</div>
+          </div>
+        `;
+        if (idx === (slide.flow || []).length - 1) return node;
+        return `${node}<div class="vision-arrow" aria-hidden="true">&rarr;</div>`;
+      }).join('');
+      return `
+        <section class="slide" id="slide-${index + 1}" data-title="${navTitle}">
+          <h2>${t(slide.title)}</h2>
+          <div class="vision-flow" aria-label="Vision flow">
+            ${flowNodes}
+          </div>
+          <div class="vision-grid">
+            <div class="definition-card">
+              <h3>${t(slide.left.title)}</h3>
+              <ul>${leftItems}</ul>
+            </div>
+            <div class="definition-card">
+              <h3>${t(slide.right.title)}</h3>
+              <ul>${rightItems}</ul>
+            </div>
+          </div>
+          ${watermark}
+        </section>
+      `;
+    };
+
+    const renderArchitectureSlide = (slide, index, navTitle) => {
+      const archIcons = [iconSet.app, iconSet.engine, iconSet.cashback, iconSet.wallet];
+      const nodes = slide.nodes.map((node, idx) => {
+        const sub = slide.nodeSubs && slide.nodeSubs[idx]
+          ? `<div class="flow-sub">${t(slide.nodeSubs[idx])}</div>`
+          : '';
+        const step = `
+          <div class="flow-step">
+            <div class="flow-icon">${archIcons[idx] || iconSet.app}</div>
+            <div class="flow-label">${t(node)}</div>
+            ${sub}
+          </div>
+        `;
+        if (idx === slide.nodes.length - 1) return step;
+        return `${step}<div class="flow-arrow" aria-hidden="true">&rarr;</div>`;
+      }).join('');
+      return `
+        <section class="slide" id="slide-${index + 1}" data-title="${navTitle}">
+          <h2>${t(slide.title)}</h2>
+          <div class="flow-diagram" aria-label="Conceptual architecture flow">
+            ${nodes}
+          </div>
+          ${watermark}
+        </section>
+      `;
+    };
+
+    const renderRoadmapSlide = (slide, index, navTitle) => {
+      const roadmapIcons = [iconSet.points, iconSet.handshake, iconSet.card];
+      const phases = slide.phases.map((phase, idx) => `
+        <div class="roadmap-card">
+          <div class="roadmap-icon">${roadmapIcons[idx] || iconSet.points}</div>
+          <div class="roadmap-phase">${t(phase.phase)}</div>
+          <div class="roadmap-title">${t(phase.title)}</div>
+          <p class="roadmap-text">${t(phase.text)}</p>
+        </div>
+      `).join('');
+      const trackNodes = slide.phases.map((phase, idx) => {
+        const node = `
+          <div class="roadmap-node">
+            <div class="roadmap-dot">${roadmapIcons[idx] || iconSet.points}</div>
+            <div class="roadmap-label">${t(phase.phase)}</div>
+          </div>
+        `;
+        if (idx === slide.phases.length - 1) return node;
+        return `${node}<div class="roadmap-connector" aria-hidden="true"></div>`;
+      }).join('');
+      return `
+        <section class="slide" id="slide-${index + 1}" data-title="${navTitle}">
+          <h2>${t(slide.title)}</h2>
+          <div class="roadmap-visual" aria-label="Roadmap timeline">
+            <div class="roadmap-track">
+              ${trackNodes}
+            </div>
+          </div>
+          <div class="roadmap-grid">
+            ${phases}
+          </div>
+          ${watermark}
+        </section>
+      `;
+    };
+
+    const renderRoleSlide = (slide, index, navTitle) => {
+      const items = slide.items.map((item) => `<li>${t(item)}</li>`).join('');
+      const highlights = (slide.highlights || []).map((item) => `
+        <span class="role-pill">
+          <span class="role-pill-icon">${iconSet[item.icon] || iconSet.engine}</span>
+          ${t(item.label)}
+        </span>
+      `).join('');
+      const summary = slide.roleSummary ? `<div class="role-summary">${t(slide.roleSummary)}</div>` : '';
+      return `
+        <section class="slide" id="slide-${index + 1}" data-title="${navTitle}">
+          <h2>${t(slide.title)}</h2>
+          <div class="role-card">
+            <div class="role-visual">
+              <div class="role-badge">
+                <div class="role-badge-icon">${iconSet.leader}</div>
+                <div>
+                  <div class="role-title">${t(slide.roleTitle)}</div>
+                  ${summary}
+                </div>
+              </div>
+              <div class="role-pills">${highlights}</div>
+            </div>
+            <ul class="role-list">${items}</ul>
+          </div>
           ${watermark}
         </section>
       `;
@@ -1693,6 +3039,11 @@
       if (slide.type === 'definition') return renderDefinitionSlide(slide, index, navTitle);
       if (slide.type === 'app') return renderAppSlide(slide, index, navTitle);
       if (slide.type === 'overview') return renderOverviewSlide(slide, index, navTitle);
+      if (slide.type === 'logic') return renderLogicSlide(slide, index, navTitle);
+      if (slide.type === 'vision') return renderVisionSlide(slide, index, navTitle);
+      if (slide.type === 'architecture') return renderArchitectureSlide(slide, index, navTitle);
+      if (slide.type === 'roadmap') return renderRoadmapSlide(slide, index, navTitle);
+      if (slide.type === 'role') return renderRoleSlide(slide, index, navTitle);
       if (slide.type === 'takeaways') return renderTakeawaysSlide(slide, index, navTitle);
       return '';
     };
@@ -1704,7 +3055,6 @@
 
     const buildNavigation = () => {
       navList.innerHTML = '';
-      dots.innerHTML = '';
       slides.forEach((slide, index) => {
         const label = slide.dataset.title || `Slide ${index + 1}`;
         const li = document.createElement('li');
@@ -1717,13 +3067,6 @@
         });
         li.appendChild(link);
         navList.appendChild(li);
-
-        const dot = document.createElement('button');
-        dot.className = 'dot';
-        dot.type = 'button';
-        dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
-        dot.addEventListener('click', () => showSlide(index, true));
-        dots.appendChild(dot);
       });
     };
 
@@ -1755,12 +3098,8 @@
 
     const updateActiveNav = () => {
       const links = navList.querySelectorAll('a');
-      const dotEls = dots.querySelectorAll('.dot');
       links.forEach((link, index) => {
         link.classList.toggle('active', index === current);
-      });
-      dotEls.forEach((dot, index) => {
-        dot.classList.toggle('active', index === current);
       });
 
       const label = slides[current].dataset.title || `Slide ${current + 1}`;
