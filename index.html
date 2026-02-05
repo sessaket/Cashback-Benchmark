@@ -1554,7 +1554,9 @@
           model: 'Cashback model',
           strengths: 'Strengths',
           limits: 'Limits',
-          why: 'Why it matters for Missions'
+          why: 'Why it matters for Missions',
+          region: 'Region',
+          rate: 'Cashback rate'
         },
         ui: {
           deckTitle: 'Cashback Benchmark',
@@ -1590,6 +1592,9 @@
         modelDescriptions: {
           real: 'Permanent, withdrawable balance',
           promo: 'Points/bonuses tied to campaigns'
+        },
+        defaults: {
+          rate: 'Varies by offer'
         },
         whyDefaults: {
           real: [
@@ -1650,7 +1655,9 @@
           model: 'Modèle de cashback',
           strengths: 'Forces',
           limits: 'Limites',
-          why: 'Pourquoi c’est clé pour Missions'
+          why: 'Pourquoi c’est clé pour Missions',
+          region: 'Région',
+          rate: 'Taux de cashback'
         },
         ui: {
           deckTitle: 'Benchmark Cashback',
@@ -1686,6 +1693,9 @@
         modelDescriptions: {
           real: 'Solde permanent et retirable',
           promo: 'Points/bonus liés aux campagnes'
+        },
+        defaults: {
+          rate: 'Variable selon l’offre'
         },
         whyDefaults: {
           real: [
@@ -1756,6 +1766,8 @@
         type: 'app',
         name: 'Kenzup',
         region: 'morocco',
+        regionLabel: { en: 'Morocco', fr: 'Maroc' },
+        cashbackRate: { en: '1 point = 1 Dh (value); rate varies by partner', fr: '1 point = 1 Dh (valeur) ; taux variable selon partenaire' },
         cashbackType: 'real',
         snapshot: {
           earn: { en: 'Spend at partner merchants', fr: 'Dépense chez marchands partenaires' },
@@ -1783,6 +1795,18 @@
           { en: 'Revenue: partner fees and merchant commissions', fr: 'Revenus : frais partenaires et commissions marchands' },
           { en: 'Constraints: partner density and payout cost', fr: 'Contraintes : densité partenaires et coût des paiements' }
         ],
+        strengths: [
+          { en: 'Distribution: strong local merchant network', fr: 'Distribution : réseau local de marchands solide' },
+          { en: 'UX: visible balance and clear cash-out', fr: 'UX : solde visible et retrait clair' }
+        ],
+        limits: [
+          { en: 'Scale depends on partner coverage', fr: 'L’échelle dépend de la couverture partenaires' },
+          { en: 'Possible tracking disputes with merchants', fr: 'Litiges de suivi possibles avec les marchands' }
+        ],
+        why: [
+          { en: 'Confirms user demand for withdrawable cashback', fr: 'Confirme la demande pour un cashback retirable' },
+          { en: 'Highlights merchant-funded model + confirmation delays', fr: 'Met en évidence le modèle marchand + délais de confirmation' }
+        ],
         wins: [
           { en: 'Distribution: local merchant network', fr: 'Distribution : réseau de marchands locaux' },
           { en: 'UX: visible balance and cash-out', fr: 'UX : solde visible et retrait' }
@@ -1796,6 +1820,8 @@
         type: 'app',
         name: 'inwi money',
         region: 'morocco',
+        regionLabel: { en: 'Morocco', fr: 'Maroc' },
+        cashbackRate: { en: 'Campaign-based offers (variable)', fr: 'Offres par campagne (variable)' },
         cashbackType: 'promo',
         snapshot: {
           earn: { en: 'Bill pay & partner offers', fr: 'Factures & offres partenaires' },
@@ -1836,6 +1862,8 @@
         type: 'app',
         name: 'Orange Money Maroc',
         region: 'morocco',
+        regionLabel: { en: 'Morocco', fr: 'Maroc' },
+        cashbackRate: { en: 'Up to 10% on recharges/bills (promo)', fr: 'Jusqu’à 10% sur recharges/factures (promo)' },
         cashbackType: 'promo',
         snapshot: {
           earn: { en: 'Bills & merchant offers', fr: 'Factures & offres marchands' },
@@ -1876,6 +1904,8 @@
         type: 'app',
         name: 'MT Cash',
         region: 'morocco',
+        regionLabel: { en: 'Morocco', fr: 'Maroc' },
+        cashbackRate: { en: 'Campaign-based offers (variable)', fr: 'Offres par campagne (variable)' },
         cashbackType: 'promo',
         snapshot: {
           earn: { en: 'Transfers & merchant promos', fr: 'Transferts & promos marchands' },
@@ -1916,6 +1946,8 @@
         type: 'app',
         name: 'stc pay',
         region: 'arab',
+        regionLabel: { en: 'Saudi Arabia', fr: 'Arabie saoudite' },
+        cashbackRate: { en: 'Campaign-based offers (variable)', fr: 'Offres par campagne (variable)' },
         cashbackType: 'promo',
         snapshot: {
           earn: { en: 'Bill pay & merchant offers', fr: 'Factures & offres marchands' },
@@ -1956,6 +1988,8 @@
         type: 'app',
         name: 'Careem Pay',
         region: 'arab',
+        regionLabel: { en: 'United Arab Emirates', fr: 'Émirats arabes unis' },
+        cashbackRate: { en: 'Rewards credits vary by offer', fr: 'Crédits/récompenses variables selon offre' },
         cashbackType: 'promo',
         snapshot: {
           earn: { en: 'Rides, food & partners', fr: 'Courses, repas & partenaires' },
@@ -1996,6 +2030,8 @@
         type: 'app',
         name: 'Smiles',
         region: 'arab',
+        regionLabel: { en: 'United Arab Emirates', fr: 'Émirats arabes unis' },
+        cashbackRate: { en: '1-10 points per AED (tiered)', fr: '1-10 points par AED (selon niveau)' },
         cashbackType: 'promo',
         snapshot: {
           earn: { en: 'Points at partner merchants', fr: 'Points chez partenaires' },
@@ -2036,6 +2072,8 @@
         type: 'app',
         name: 'Vodafone Cash',
         region: 'arab',
+        regionLabel: { en: 'Egypt', fr: 'Égypte' },
+        cashbackRate: { en: 'Up to 20% cashback (promo, capped)', fr: 'Jusqu’à 20% cashback (promo, plafonné)' },
         cashbackType: 'promo',
         snapshot: {
           earn: { en: 'Bill pay & merchant offers', fr: 'Factures & offres marchands' },
@@ -2076,6 +2114,8 @@
         type: 'app',
         name: 'M-Pesa',
         region: 'africa',
+        regionLabel: { en: 'Kenya', fr: 'Kenya' },
+        cashbackRate: { en: 'Campaign-based offers (variable)', fr: 'Offres par campagne (variable)' },
         cashbackType: 'promo',
         snapshot: {
           earn: { en: 'Bill pay & merchant pay', fr: 'Factures & paiements marchands' },
@@ -2116,6 +2156,8 @@
         type: 'app',
         name: 'OPay',
         region: 'africa',
+        regionLabel: { en: 'Nigeria', fr: 'Nigeria' },
+        cashbackRate: { en: 'Campaign-based offers (variable)', fr: 'Offres par campagne (variable)' },
         cashbackType: 'promo',
         snapshot: {
           earn: { en: 'Bills, transfers & merchants', fr: 'Factures, transferts & marchands' },
@@ -2156,6 +2198,8 @@
         type: 'app',
         name: 'PalmPay',
         region: 'africa',
+        regionLabel: { en: 'Nigeria', fr: 'Nigeria' },
+        cashbackRate: { en: 'Campaign-based offers (variable)', fr: 'Offres par campagne (variable)' },
         cashbackType: 'promo',
         snapshot: {
           earn: { en: 'Bills & in-app pay', fr: 'Factures & paiements in-app' },
@@ -2196,6 +2240,12 @@
         type: 'app',
         name: 'Airtel Money',
         region: 'africa',
+        regionLabel: { en: 'Africa (14 markets)', fr: 'Afrique (14 marchés)' },
+        regionDetail: {
+          en: 'Chad, Congo-Brazzaville, DR Congo, Gabon, Kenya, Madagascar, Malawi, Niger, Nigeria, Rwanda, Seychelles, Tanzania, Uganda, Zambia',
+          fr: 'Tchad, Congo-Brazzaville, RD Congo, Gabon, Kenya, Madagascar, Malawi, Niger, Nigeria, Rwanda, Seychelles, Tanzanie, Ouganda, Zambie'
+        },
+        cashbackRate: { en: 'Campaign-based offers (variable)', fr: 'Offres par campagne (variable)' },
         cashbackType: 'promo',
         snapshot: {
           earn: { en: 'Airtime & bill promos', fr: 'Airtime & promos factures' },
@@ -2236,7 +2286,8 @@
         type: 'app',
         name: 'Revolut',
         region: 'europe',
-        regionLabel: { en: 'Europe (Global reference)', fr: 'Europe (référence globale)' },
+        regionLabel: { en: 'UK / EEA (global reference)', fr: 'R.-U. / EEE (référence globale)' },
+        cashbackRate: { en: 'Up to 1% (Revolut Pro card)', fr: 'Jusqu’à 1% (carte Revolut Pro)' },
         cashbackType: 'real',
         snapshot: {
           earn: { en: 'Card-linked partner offers', fr: 'Offres partenaires liées à la carte' },
@@ -2276,6 +2327,8 @@
         type: 'app',
         name: 'TopCashback',
         region: 'europe',
+        regionLabel: { en: 'United Kingdom', fr: 'Royaume-Uni' },
+        cashbackRate: { en: 'Varies by retailer (offer %)', fr: 'Variable selon le marchand (taux offre)' },
         cashbackType: 'real',
         snapshot: {
           earn: { en: 'Affiliate retailer spend', fr: 'Dépense marchands affiliés' },
@@ -2316,6 +2369,8 @@
         type: 'app',
         name: 'iGraal',
         region: 'europe',
+        regionLabel: { en: 'France', fr: 'France' },
+        cashbackRate: { en: 'Up to 30% cashback', fr: 'Jusqu’à 30% de cashback' },
         cashbackType: 'real',
         snapshot: {
           earn: { en: 'Affiliate spend via app', fr: 'Dépense via app affiliée' },
@@ -2356,6 +2411,8 @@
         type: 'app',
         name: 'PAYBACK',
         region: 'europe',
+        regionLabel: { en: 'Germany', fr: 'Allemagne' },
+        cashbackRate: { en: '1 point per €2 (1 point = €0.01)', fr: '1 point par 2 € (1 point = 0,01 €)' },
         cashbackType: 'promo',
         snapshot: {
           earn: { en: 'Points at partner merchants', fr: 'Points chez partenaires' },
@@ -2396,6 +2453,8 @@
         type: 'app',
         name: 'myWorld / Cashback World',
         region: 'europe',
+        regionLabel: { en: 'Austria (global network)', fr: 'Autriche (réseau mondial)' },
+        cashbackRate: { en: 'Up to 5% cashback + Shopping Points', fr: 'Jusqu’à 5% cashback + points d’achat' },
         cashbackType: 'real',
         snapshot: {
           earn: { en: 'Spend online/offline partners', fr: 'Dépense partenaires online/offline' },
@@ -2548,6 +2607,32 @@
           { en: 'Cashback roadmap & sequencing', fr: 'Feuille de route cashback & séquencement' },
           { en: 'Coordination across teams and partners', fr: 'Coordination des équipes et partenaires' }
         ]
+      },
+      {
+        type: 'missions',
+        title: { en: 'Missions — The Core Idea', fr: 'Missions — L’idée centrale' },
+        left: {
+          title: { en: 'What is Missions?', fr: 'Qu’est-ce que Missions ?' },
+          items: [
+            { en: 'Explore a city map like Google Maps.', fr: 'Explorer une carte comme Google Maps.' },
+            { en: 'Complete missions (visit places / do actions).', fr: 'Réaliser des missions (visiter des lieux / faire des actions).' },
+            { en: 'Earn rewards instantly (points / discounts / partner gifts).', fr: 'Gagner des récompenses instantanées (points / réductions / cadeaux partenaires).' },
+            { en: 'Missions can be done without login; login required to claim rewards.', fr: 'Missions possibles sans connexion ; connexion requise pour récupérer les cadeaux.' }
+          ]
+        },
+        right: {
+          title: { en: 'How rewards work (simple loop)', fr: 'Comment fonctionnent les récompenses (boucle simple)' },
+          flow: [
+            { en: 'Action', fr: 'Action' },
+            { en: 'Validate', fr: 'Validation' },
+            { en: 'Reward', fr: 'Récompense' },
+            { en: 'Repeat', fr: 'Répéter' }
+          ],
+          callout: {
+            en: 'This creates habits before spending (unlike classic cashback which rewards after spending).',
+            fr: 'Ça crée l’habitude avant la dépense (contrairement au cashback classique qui récompense après la dépense).'
+          }
+        }
       }
     ];
 
@@ -2683,6 +2768,7 @@
       const storeUrl = slide.store || slide.website;
       const labels = i18n[currentLang].labels;
       const regionLabel = slide.regionLabel ? t(slide.regionLabel) : i18n[currentLang].regions[slide.region];
+      const regionStudy = slide.regionDetail ? t(slide.regionDetail) : regionLabel;
       const typeLine = stripTypePrefix(t(appTypeMap[slide.name] || slide.appType || slide.positioning));
       const modelTag = i18n[currentLang].overview.badges[slide.cashbackType] || '';
       const modelDescription = i18n[currentLang].modelDescriptions[slide.cashbackType] || '';
@@ -2690,6 +2776,7 @@
       const limits = (slide.limits || slide.risks || []).map((item) => `<li>${t(item)}</li>`).join('');
       const whyItems = (slide.why || i18n[currentLang].whyDefaults[slide.cashbackType] || [])
         .map((item) => `<li>${t(item)}</li>`).join('');
+      const rateText = slide.cashbackRate ? t(slide.cashbackRate) : i18n[currentLang].defaults.rate;
       const snapshot = slide.snapshot || {};
       const timingType = snapshot.timingType || 'delayed';
       const fundingType = snapshot.fundingType || 'merchant';
@@ -2717,6 +2804,14 @@
               </div>
             </div>
             <div class=\"app-study\">
+              <div class=\"study-section\">
+                <div class=\"study-title\">${labels.region}</div>
+                <div class=\"study-line\">${regionStudy}</div>
+              </div>
+              <div class=\"study-section\">
+                <div class=\"study-title\">${labels.rate}</div>
+                <div class=\"study-line\">${rateText}</div>
+              </div>
               <div class=\"study-section\">
                 <div class=\"study-title\">${labels.type}</div>
                 <div class=\"study-line\">${typeLine}</div>
@@ -2802,6 +2897,30 @@
               <div class="logic-title">${t(slide.right.title)}</div>
               <div class="logic-flow">${rightSteps}</div>
               <div class="logic-loop">${loopItems}</div>
+              <div class="logic-callout">${t(slide.right.callout)}</div>
+            </div>
+          </div>
+          ${watermark}
+        </section>
+      `;
+    };
+
+    const renderMissionsSlide = (slide, index, navTitle) => {
+      const leftItems = slide.left.items.map((item) => `<li>${t(item)}</li>`).join('');
+      const flow = slide.right.flow.map((item, idx) => `
+        <span class="mini-pill real">${t(item)}</span>${idx < slide.right.flow.length - 1 ? '<span class="mini-arrow">&rarr;</span>' : ''}
+      `).join('');
+      return `
+        <section class="slide" id="slide-${index + 1}" data-title="${navTitle}">
+          <h2>${t(slide.title)}</h2>
+          <div class="vision-grid">
+            <div class="definition-card">
+              <h3>${t(slide.left.title)}</h3>
+              <ul>${leftItems}</ul>
+            </div>
+            <div class="definition-card">
+              <h3>${t(slide.right.title)}</h3>
+              <div class="mini-flow">${flow}</div>
               <div class="logic-callout">${t(slide.right.callout)}</div>
             </div>
           </div>
@@ -3040,6 +3159,7 @@
       if (slide.type === 'app') return renderAppSlide(slide, index, navTitle);
       if (slide.type === 'overview') return renderOverviewSlide(slide, index, navTitle);
       if (slide.type === 'logic') return renderLogicSlide(slide, index, navTitle);
+      if (slide.type === 'missions') return renderMissionsSlide(slide, index, navTitle);
       if (slide.type === 'vision') return renderVisionSlide(slide, index, navTitle);
       if (slide.type === 'architecture') return renderArchitectureSlide(slide, index, navTitle);
       if (slide.type === 'roadmap') return renderRoadmapSlide(slide, index, navTitle);
